@@ -1,10 +1,13 @@
-const { Component, Mixin, StateDeprecated } = Shopware;
+const { Component, Mixin } = Shopware;
+const { Criteria, EntityCollection } = Shopware.Data;
 
 import template from './index.html.twig';
 import './index.scss';
 
 Component.register('sw-cms-el-config-moorl-shop-the-look', {
     template,
+
+    inject: ['repositoryFactory'],
 
     mixins: [
         Mixin.getByName('cms-element')
@@ -46,12 +49,8 @@ Component.register('sw-cms-el-config-moorl-shop-the-look', {
             return context;
         },
 
-        mediaStore() {
-            return StateDeprecated.getStore('media');
-        },
-
-        uploadStore() {
-            return StateDeprecated.getStore('upload');
+        mediaRepository() {
+            return this.repositoryFactory.create('media');
         },
 
         uploadTag() {
@@ -65,6 +64,7 @@ Component.register('sw-cms-el-config-moorl-shop-the-look', {
 
             return this.element.config.media.value;
         }
+
     },
 
     created() {
@@ -94,35 +94,37 @@ Component.register('sw-cms-el-config-moorl-shop-the-look', {
         },
 
         onProductsChange() {
+
+            const _that = this;
+
             this.element.config.products.value = this.productCollection.getIds();
+
+            this.element.config.products.value.forEach(function(id) {
+                if (!_that.element.config.productMediaHotspots.value[id]) {
+                    _that.element.config.productMediaHotspots.value[id] = {
+                        top: '50%',
+                        left: '50%'
+                    };
+                }
+            });
 
             this.$set(this.element.data, 'products', this.productCollection);
         },
 
-        onChangeMedia() {
-            return this.uploadStore.runUploads(this.uploadTag);
-        },
+        async onImageUpload({ targetId }) {
+            const mediaEntity = await this.mediaRepository.get(targetId, Shopware.Context.api);
 
-        onImageUpload({ targetId }) {
-            this.mediaStore.getByIdAsync(targetId).then((mediaEntity) => {
-                this.element.config.media.value = mediaEntity.id;
+            this.element.config.media.value = mediaEntity.id;
 
-                if (this.element.data) {
-                    this.$set(this.element.data, 'mediaId', mediaEntity.id);
-                    this.$set(this.element.data, 'media', mediaEntity);
-                }
+            this.updateElementData(mediaEntity);
 
-                this.$emit('element-update', this.element);
-            });
+            this.$emit('element-update', this.element);
         },
 
         onImageRemove() {
             this.element.config.media.value = null;
 
-            if (this.element.data) {
-                this.$set(this.element.data, 'mediaId', null);
-                this.$set(this.element.data, 'media', null);
-            }
+            this.updateElementData();
 
             this.$emit('element-update', this.element);
         },
@@ -132,34 +134,21 @@ Component.register('sw-cms-el-config-moorl-shop-the-look', {
         },
 
         onSelectionChanges(mediaEntity) {
-            this.element.config.media.value = mediaEntity[0].id;
+            const media = mediaEntity[0];
+            this.element.config.media.value = media.id;
 
-            if (this.element.data) {
-                this.$set(this.element.data, 'mediaId', mediaEntity[0].id);
-                this.$set(this.element.data, 'media', mediaEntity[0]);
-            }
+            this.updateElementData(media);
 
             this.$emit('element-update', this.element);
+        },
+
+        updateElementData(media = null) {
+            this.$set(this.element.data, 'mediaId', media === null ? null : media.id);
+            this.$set(this.element.data, 'media', media);
         },
 
         onOpenMediaModal() {
             this.mediaModalIsOpen = true;
-        },
-
-        onChangeMinHeight(value) {
-            this.element.config.minHeight.value = value === null ? '' : value;
-
-            this.$emit('element-update', this.element);
-        },
-
-        onChangeDisplayMode(value) {
-            if (value === 'cover') {
-                this.element.config.verticalAlign.value = '';
-            } else {
-                this.element.config.minHeight.value = '';
-            }
-
-            this.$emit('element-update', this.element);
         }
     }
 });

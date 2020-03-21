@@ -2,9 +2,16 @@
     <div class="hotspot-area">
         <div class="hotspot-area-image">
             <img :src="mediaUrl">
-        </div>
-        <div claas="hotspot-area-overlay">
-
+            <div class="hotspot-area-image-overlay">
+                <template v-if="element.data.products">
+                    <div v-if="element.config.productMediaHotspots.value[product.id]"
+                         v-for="product in element.data.products"
+                         :title="product.name"
+                         class="hotspot-area-image-overlay-dot"
+                         :style="{'top': element.config.productMediaHotspots.value[product.id].top, 'left': element.config.productMediaHotspots.value[product.id].left}">
+                    </div>
+                </template>
+            </div>
         </div>
     </div>
     <div class="product-list">
