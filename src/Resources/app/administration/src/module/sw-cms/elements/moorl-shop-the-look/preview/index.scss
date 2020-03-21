@@ -1,0 +1,67 @@
+.sw-cms-el-preview-moorl-shop-the-look {
+    width: 100%;
+    font-size: 12px;
+    .profile {
+        text-align: center;
+        padding: 22px 3px 3px;
+        margin: 16px 0 0;
+        background-color: #f7f7f7;
+        img {
+            top: 8px;
+            position: absolute;
+            left: calc(50% - 20px);
+            border: 5px solid white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .rating {
+            color: orange;
+            margin: 0 0 8px 0;
+        }
+        h3, p {
+            margin: 0 0 8px 0;
+            color: orange;
+            span {
+                color: #333;
+            }
+
+        }
+        blockquote {
+            margin: 0 0 8px 0;
+            &:before {
+                content: open-quote;
+                position: relative;
+                color: orange;
+            }
+            &:after {
+                content: close-quote;
+                position: relative;
+                color: orange;
+            }
+        }
+    }
+}
+
+.sw-cms-preview-moorl-shop-the-look {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 10px;
+    padding: 3px;
+    height: 160px;
+    position: relative;
+    .sw-cms-el-preview-moorl-shop-the-look {
+        position: relative;
+        display: flex;
+        .profile {
+            padding: 22px 0 0;
+            margin: 22px 0 0;
+            background-color: #f7f7f7;
+            img {
+                top: 0;
+            }
+        }
+
+    }
+}

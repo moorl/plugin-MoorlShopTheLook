@@ -1,0 +1,43 @@
+const Application = Shopware.Application;
+import './component';
+import './config';
+import './preview';
+
+const Criteria = Shopware.Data.Criteria;
+const criteria = new Criteria();
+criteria.addAssociation('cover');
+
+Application.getContainer('service').cmsService.registerCmsElement({
+    name: 'moorl-shop-the-look',
+    label: 'Shop The Look',
+    component: 'sw-cms-el-moorl-shop-the-look',
+    configComponent: 'sw-cms-el-config-moorl-shop-the-look',
+    previewComponent: 'sw-cms-el-preview-moorl-shop-the-look',
+    defaultConfig: {
+        products: {
+            source: 'static',
+            value: [],
+            required: true,
+            entity: {
+                name: 'product',
+                criteria: criteria
+            }
+        },
+        media: {
+            source: 'static',
+            value: null,
+            required: true,
+            entity: {
+                name: 'media'
+            }
+        },
+        productMediaHotspots: {
+            source: 'static',
+            value: {}
+        },
+        style: {
+            source: 'static',
+            value: 'standard'
+        }
+    }
+});

@@ -1,0 +1,28 @@
+{% block element_moorl_shop_the_look %}
+    {%  set config = element.fieldConfig.elements %}
+    <div class="cms-element-{{ element.type }}"
+         {% if element.config.animateIn.value and element.config.animateIn.value != 'none' %}data-animate-in="{{ element.config.animateIn.value }}"{% endif %}
+        {% if element.config.animateOut.value and element.config.animateOut.value != 'none' %}data-animate-out="{{ element.config.animateOut.value }}"{% endif %}
+        {% if element.config.animateHover.value and element.config.animateHover.value != 'none' %}data-animate-hover="{{ element.config.animateHover.value }}"{% endif %}>
+        <div class="profile" style="background: {{ config.boxBackground.value }}; color: {{ config.boxColor.value }};">
+            {% sw_thumbnails 'cms-image-thumbnails' with {
+                media: element.data.media
+            } %}
+            {% if config.rating.value > 0 %}
+                <div class="rating" style="color: {{ config.boxHighlightColor.value }};">
+                    {% for i in 1..config.ratingMax.value %}
+                        {% if config.rating.value >= i %}
+                            <i class="fas fa-star"></i>
+                        {% else %}
+                            <i class="far fa-star"></i>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <blockquote style="--style-color: {{ config.boxHighlightColor.value }};">
+                {{ config.quote.value }}
+            </blockquote>
+            <h3 style="color: {{ config.boxHighlightColor.value }};">{{ config.customer.value }} <span style="color: {{ config.boxColor.value }};">{{ config.company.value }}</span></h3>
+        </div>
+    </div>
+{% endblock %}
