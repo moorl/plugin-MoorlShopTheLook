@@ -9,8 +9,7 @@
         }
     ],
     "require": {
-        "shopware/core": "*",
-        "moorl/foundation": "*"
+        "shopware/core": "*"
     },
     "type": "shopware-platform-plugin",
     "autoload": {
