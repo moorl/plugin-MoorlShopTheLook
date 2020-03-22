@@ -16,10 +16,29 @@
     </div>
     <div class="product-list">
         <div class="product-list-content">
-
+            <template v-if="element.data.products">
+                <div v-if="element.config.productMediaHotspots.value[product.id]"
+                     v-for="product in element.data.products"
+                     class="product-list-content-item">
+                    <img :src="product.cover.media.url" :alt="product.name">
+                    <div class="product-list-content-item-info">
+                        <h4>{{ product.name }}</h4>
+                        <div class="product-list-content-item-info-price">
+                           {{ product.price[0].gross | numberFormat }}
+                        </div>
+                    </div>
+                    <div>
+                        <i class="fas fa-check"></i>
+                    </div>
+                </div>
+            </template>
         </div>
+        <hr>
         <div class="product-list-buy">
-
+            <div class="product-list-buy-price">
+                <div>Total:</div>
+                <div class="product-list-buy-price-total">{{ priceTotal | numberFormat }}</div>
+            </div>
         </div>
     </div>
 </div>

@@ -2,15 +2,62 @@
     min-height: 200px;
     width: 100%;
     display: flex;
+    justify-content: space-between;
 
     .hotspot-area {
-        width: calc(100% - 350px);
+        width: calc(100% - 320px);
     }
 
     .product-list {
-        width: 350px;
-        background-color: #d6d8db;
+        width: 300px;
         height: 100%;
+
+        .product-list-content-item {
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            img {
+                width: 25%;
+                height: auto;
+                display: block;
+            }
+
+            .product-list-content-item-info {
+                width: 50%;
+
+                h4 {
+                    margin-bottom: 10px;
+                }
+
+                .product-list-content-item-info-price {
+                    text-align: right;
+                }
+
+            }
+
+        }
+
+    }
+
+    .product-list-buy {
+        margin-top: 10px;
+
+        .product-list-buy-price {
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: flex-end;
+            div {
+                vertical-align: baseline;
+                line-height: 30px;
+            }
+            .product-list-buy-price-total {
+                font-size: 1.3em;
+                margin-left: 5px;
+            }
+        }
+
     }
 
     .hotspot-area-image {

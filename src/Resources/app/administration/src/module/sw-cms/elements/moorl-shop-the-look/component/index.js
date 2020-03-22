@@ -32,6 +32,19 @@ Component.register('sw-cms-el-moorl-shop-the-look', {
             }
 
             return `${context.assetsPath}/administration/static/img/cms/preview_mountain_large.jpg`;
+        },
+
+        priceTotal() {
+            const elemData = this.element.data.products;
+            let price = 0;
+
+            if (elemData) {
+                elemData.forEach(function (product) {
+                    price = price + product.price[0].gross;
+                });
+            }
+
+            return price;
         }
     },
 
@@ -52,6 +65,12 @@ Component.register('sw-cms-el-moorl-shop-the-look', {
         createdComponent() {
             this.initElementConfig('moorl-shop-the-look');
             this.initElementData('moorl-shop-the-look');
+        }
+    },
+
+    filters: {
+        numberFormat: function (value) {
+            return new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(value)
         }
     }
 });
