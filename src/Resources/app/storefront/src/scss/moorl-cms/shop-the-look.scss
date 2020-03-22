@@ -1,54 +1,142 @@
 .cms-element-moorl-shop-the-look {
     width: 100%;
-    .profile {
-        text-align: center;
-        padding: 70px 10px 10px;
-        margin: 60px 0 0;
-        background-color: $light;
-        color: $card-color;
-        img {
-            top: 0;
-            position: absolute;
-            left: calc(50% - 60px);
-            border: 10px solid $body-bg;
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-        .rating {
-            color: $primary;
+    min-height: 200px;
+    display: flex;
+    justify-content: space-between;
+
+    .hotspot-area {
+        width: calc(100% - 320px);
+    }
+
+    .product-list {
+        width: 300px;
+        height: 100%;
+
+        .product-list-content-item {
             margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            img {
+                width: 25%;
+                height: auto;
+                display: block;
+            }
+
+            .product-list-content-item-info {
+                width: 50%;
+
+                h4 {
+                    margin-bottom: 10px;
+                    font-size: 14px;
+                    line-height: 18px;
+                }
+
+                .product-list-content-item-info-price {
+                    text-align: right;
+                }
+
+            }
+
         }
-        h3 {
-            font-size: 20px;
-            margin-top: 15px;
-            color: $primary;
-            span {
-                font-size: 12px;
-                color: $card-color;
+
+    }
+
+    .product-list-buy {
+        margin-top: 10px;
+
+        .product-list-buy-price {
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: flex-end;
+            div {
+                vertical-align: baseline;
+                line-height: 30px;
+            }
+            .product-list-buy-price-total {
+                font-size: 1.3em;
+                margin-left: 5px;
             }
         }
-        blockquote {
-            font-size: 16px;
-            line-height: 30px;
-            --style-color: $primary;
-            &:before {
-                content: open-quote;
-                font-size: 50px;
-                position: relative;
-                color: var(--style-color);
-                line-height: 20px;
-                bottom: -15px;
-            }
-            &:after {
-                content: close-quote;
-                font-size: 50px;
-                position: relative;
-                color: var(--style-color);
-                line-height: 20px;
-                bottom: -15px;
+
+    }
+
+    .hotspot-area-image {
+        position: relative;
+        width: 100%;
+        height: auto;
+        .hotspot-area-image-overlay {
+            position: absolute;
+            top: 0;
+            left:0;
+            width: 100%;
+            height: 100%;
+            .hotspot-area-image-overlay-dot {
+                position: absolute;
+                margin-top: -10px;
+                margin-left: -10px;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                border: 3px solid $border-color;
+                background-color: rgba($body-bg, 80%);
+                cursor: pointer;
+                transition: border-color 0.3s;
+                .hover-card {
+                    text-align: center;
+                    display: none;
+                    opacity: 0;
+                    transition: opacity 0.3s;
+                    padding: 10px;
+                    background-color: rgba($body-bg, 80%);
+                    color: $body-color;
+                    width: 160px;
+                    height: auto;
+                    position: absolute;
+                    left: -75px;
+                    top: 30px;
+
+                    &:before {
+                        position: absolute;
+                        left: 67px;
+                        top: -10px;
+                        content: "";
+                        width: 0;
+                        height: 0;
+                        border-style: solid;
+                        border-width: 0 15px 10px 15px;
+                        border-color: transparent transparent rgba($body-bg, 80%) transparent;
+                    }
+
+                    img, p {
+                        margin-bottom: 10px;
+                        display: block;
+                    }
+
+                    h4 {
+                        margin-bottom: 10px;
+                        font-size: 14px;
+                        line-height: 18px;
+                    }
+
+                }
+                &:focus,
+                &:hover,
+                &:active {
+                    border-color: $primary;
+                    .hover-card {
+                        display: block;
+                        opacity: 1;
+                    }
+                }
             }
         }
+    }
+
+    img {
+        display: block;
+        height: auto;
+        width: 100%;
     }
 }
