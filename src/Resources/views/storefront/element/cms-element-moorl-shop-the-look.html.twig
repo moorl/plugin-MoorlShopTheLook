@@ -16,9 +16,9 @@
                                     {% sw_icon 'placeholder' style {'size': 'fluid'} %}
                                 {% endif %}
                                 <h4>{{ product.name }}</h4>
-                                <p>{{ product.price.first.gross|currency }}</p>
+                                <p>{{ product.price.first.gross|currency }}{{ "general.star"|trans|sw_sanitize }}</p>
                                 <a href="{{ seoUrl('frontend.detail.page', {'productId': product.id}) }}"
-                                   class="btn btn-block btn-primary"
+                                   class="btn btn-block btn-primary btn-buy"
                                    data-toggle="modal"
                                    data-modal-class="quickview-modal"
                                    data-url="{{ path('widgets.quickview.minimal', { 'productId': product.id }) }}"
@@ -54,9 +54,15 @@
                                 {% sw_icon 'placeholder' style {'size': 'fluid'} %}
                             {% endif %}
                             <div class="product-list-content-item-info">
-                                <h4>{{ product.name }}</h4>
+                                <h4>
+                                    <a href="{{ seoUrl('frontend.detail.page', {'productId': product.id}) }}"
+                                       data-toggle="modal"
+                                       data-modal-class="quickview-modal"
+                                       data-url="{{ path('widgets.quickview.minimal', { 'productId': product.id }) }}"
+                                    >{{ product.name }}</a>
+                                </h4>
                                 <div class="product-list-content-item-info-price">
-                                    {{ product.price.first.gross|currency }}
+                                    {{ product.price.first.gross|currency }}{{ "general.star"|trans|sw_sanitize }}
                                 </div>
                             </div>
                             <div>
@@ -68,8 +74,8 @@
                 <hr>
                 <div class="product-list-buy">
                     <div class="product-list-buy-price">
-                        <div>Total:</div>
-                        <div class="product-list-buy-price-total">{{ priceTotal|currency }}</div>
+                        <div>{{ "account.orderItemColumnTotal"|trans|sw_sanitize }}:</div>
+                        <div class="product-list-buy-price-total">{{ priceTotal|currency }}{{ "general.star"|trans|sw_sanitize }}</div>
                     </div>
                     <button class="btn btn-primary btn-block btn-buy"
                             title="{{ "detail.addProduct"|trans|striptags }}"

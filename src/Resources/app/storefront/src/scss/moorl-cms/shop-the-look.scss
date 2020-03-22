@@ -9,11 +9,11 @@
     justify-content: space-between;
 
     .hotspot-area {
-        width: calc(100% - 320px);
+        width: calc(100% - 350px);
     }
 
     .product-list {
-        width: 300px;
+        width: 330px;
         height: 100%;
 
         .product-list-content-item {
@@ -22,8 +22,8 @@
             justify-content: space-between;
             align-items: center;
 
-            img {
-                width: 25%;
+            img, select {
+                width: 20%;
                 height: auto;
                 display: block;
             }
