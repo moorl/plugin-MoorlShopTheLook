@@ -145,3 +145,17 @@
         width: 100%;
     }
 }
+
+@include media-breakpoint-down(sm) {
+    .cms-element-moorl-shop-the-look {
+        display: block;
+        .hotspot-area {
+            margin-bottom: $grid-gutter-width;
+            width: 100%;
+        }
+        .product-list {
+            width: 100%;
+            height: auto;
+        }
+    }
+}

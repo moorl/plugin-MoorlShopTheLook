@@ -28,7 +28,7 @@ class MoorlCmsShopTheLook extends Plugin
         }
 
         PluginHelpers::removeCmsBlocks($this->container, $context->getContext(), [
-            'moorl-shop-the-look-three-column'
+            'moorl-shop-the-look'
         ]);
 
         PluginHelpers::removeCmsSlots($this->container, $context->getContext(), [
