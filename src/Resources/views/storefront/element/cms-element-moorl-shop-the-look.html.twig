@@ -15,7 +15,7 @@
                                 {% else %}
                                     {% sw_icon 'placeholder' style {'size': 'fluid'} %}
                                 {% endif %}
-                                <h4>{{ product.name }}</h4>
+                                <h4>{{ product.translated.name }}</h4>
                                 <p>{{ product.price.first.gross|currency }}{{ "general.star"|trans|sw_sanitize }}</p>
                                 <a href="{{ seoUrl('frontend.detail.page', {'productId': product.id}) }}"
                                    class="btn btn-block btn-primary btn-buy"
@@ -59,7 +59,7 @@
                                        data-toggle="modal"
                                        data-modal-class="quickview-modal"
                                        data-url="{{ path('widgets.quickview.minimal', { 'productId': product.id }) }}"
-                                    >{{ product.name }}</a>
+                                    >{{ product.translated.name }}</a>
                                 </h4>
                                 <div class="product-list-content-item-info-price">
                                     {{ product.price.first.gross|currency }}{{ "general.star"|trans|sw_sanitize }}

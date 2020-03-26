@@ -36,15 +36,23 @@ Component.register('sw-cms-el-moorl-shop-the-look', {
 
         priceTotal() {
             const elemData = this.element.data.products;
+
+            console.log(elemData);
+
             let price = 0;
 
             if (elemData) {
-                elemData.forEach(function (product) {
-                    price = price + product.price[0].gross;
-                });
+                if (elemData) {
+                    elemData.forEach(function (product) {
+                        if (product.price) {
+                            price = price + product.price[0].gross;
+                        }
+                    });
+                }
             }
 
             return price;
+
         }
     },
 
