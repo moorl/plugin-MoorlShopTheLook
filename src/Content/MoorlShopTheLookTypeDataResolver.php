@@ -57,7 +57,7 @@ class MoorlShopTheLookTypeDataResolver extends AbstractCmsElementResolver
 
         $image = new ImageStruct();
         $slider = new ProductSliderStruct();
-        $struct = new MoorlShopTheLookStruct();
+        $struct = new MoorlDealCounterStruct();
 
         $struct->setMedia($image);
         $struct->setProducts($slider);
