@@ -3,7 +3,7 @@
     <div class="cms-element-{{ element.type }}">
         <div class="hotspot-area">
             <div class="hotspot-area-image">
-                <img src="{{ element.data.media.media.url }}">
+                <img src="{{ element.data.media.media.url }}" alt="{{ element.data.media.media.alt }}">
                 <div class="hotspot-area-image-overlay">
                     {% for product in element.data.products.products %}
                         <div class="hotspot-area-image-overlay-dot"
