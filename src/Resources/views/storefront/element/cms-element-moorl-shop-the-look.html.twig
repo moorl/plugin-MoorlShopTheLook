@@ -11,7 +11,10 @@
                              style="top: {{ element.config.productMediaHotspots.value[product.id].top }}; left: {{ element.config.productMediaHotspots.value[product.id].left }}">
                             <div class="hover-card">
                                 {% if product.cover.media.url %}
-                                    {% sw_thumbnails 'cart-item-img-thumbnails' with {media: product.cover.media } %}
+                                    {% set attributes = {
+                                        'alt': product.translated.name
+                                    } %}
+                                    {% sw_thumbnails 'product-image-thumbnails' with { media: product.cover.media } %}
                                 {% else %}
                                     {% sw_icon 'placeholder' style {'size': 'fluid'} %}
                                 {% endif %}
@@ -49,7 +52,10 @@
 
                         <div class="product-list-content-item">
                             {% if product.cover.media.url %}
-                                {% sw_thumbnails 'cart-item-img-thumbnails' with {media: product.cover.media } %}
+                                {% set attributes = {
+                                    'alt': product.translated.name
+                                } %}
+                                {% sw_thumbnails 'product-image-thumbnails' with { media: product.cover.media } %}
                             {% else %}
                                 {% sw_icon 'placeholder' style {'size': 'fluid'} %}
                             {% endif %}
