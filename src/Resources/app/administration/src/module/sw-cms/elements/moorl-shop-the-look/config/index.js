@@ -22,7 +22,6 @@ Component.register('sw-cms-el-config-moorl-shop-the-look', {
     },
 
     computed: {
-
         productRepository() {
             return this.repositoryFactory.create('product');
         },
@@ -64,7 +63,6 @@ Component.register('sw-cms-el-config-moorl-shop-the-look', {
 
             return this.element.config.media.value;
         }
-
     },
 
     created() {
@@ -74,7 +72,6 @@ Component.register('sw-cms-el-config-moorl-shop-the-look', {
     methods: {
         createdComponent() {
             this.initElementConfig('moorl-shop-the-look');
-
 
             this.productCollection = new EntityCollection('/product', 'product', Shopware.Context.api);
 
@@ -94,7 +91,6 @@ Component.register('sw-cms-el-config-moorl-shop-the-look', {
         },
 
         onProductsChange() {
-
             const _that = this;
 
             this.element.config.products.value = this.productCollection.getIds();
