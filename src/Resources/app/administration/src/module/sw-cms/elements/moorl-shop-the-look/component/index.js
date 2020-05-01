@@ -13,15 +13,6 @@ Component.register('sw-cms-el-moorl-shop-the-look', {
         mediaUrl() {
             const context = Shopware.Context.api;
             const elemData = this.element.data.media;
-            const mediaSource = this.element.config.media.source;
-
-            if (mediaSource === 'mapped') {
-                const demoMedia = this.getDemoValue(this.element.config.media.value);
-
-                if (demoMedia && demoMedia.url) {
-                    return demoMedia.url;
-                }
-            }
 
             if (elemData && elemData.id) {
                 return this.element.data.media.url;

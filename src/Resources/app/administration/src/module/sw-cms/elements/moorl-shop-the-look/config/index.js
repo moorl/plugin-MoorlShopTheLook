@@ -7,11 +7,11 @@ import './index.scss';
 Component.register('sw-cms-el-config-moorl-shop-the-look', {
     template,
 
-    inject: ['repositoryFactory'],
-
     mixins: [
         Mixin.getByName('cms-element')
     ],
+
+    inject: ['repositoryFactory'],
 
     data() {
         return {
@@ -72,6 +72,7 @@ Component.register('sw-cms-el-config-moorl-shop-the-look', {
     methods: {
         createdComponent() {
             this.initElementConfig('moorl-shop-the-look');
+            this.initElementData('moorl-shop-the-look');
 
             this.productCollection = new EntityCollection('/product', 'product', Shopware.Context.api);
 
@@ -113,14 +114,17 @@ Component.register('sw-cms-el-config-moorl-shop-the-look', {
             this.element.config.media.value = mediaEntity.id;
 
             this.updateElementData(mediaEntity);
-
-            this.$emit('element-update', this.element);
         },
 
         onImageRemove() {
             this.element.config.media.value = null;
 
             this.updateElementData();
+        },
+
+        updateElementData(media = null) {
+            this.$set(this.element.data, 'mediaId', media === null ? null : media.id);
+            this.$set(this.element.data, 'media', media);
 
             this.$emit('element-update', this.element);
         },
@@ -134,13 +138,6 @@ Component.register('sw-cms-el-config-moorl-shop-the-look', {
             this.element.config.media.value = media.id;
 
             this.updateElementData(media);
-
-            this.$emit('element-update', this.element);
-        },
-
-        updateElementData(media = null) {
-            this.$set(this.element.data, 'mediaId', media === null ? null : media.id);
-            this.$set(this.element.data, 'media', media);
         },
 
         onOpenMediaModal() {
