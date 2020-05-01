@@ -1,5 +1,4 @@
 <div class="sw-cms-el-config-moorl-shop-the-look">
-
     <sw-entity-multi-select
         class="sw-cms-el-config-product-slider__products"
         :label="$tc('sw-cms.elements.productSlider.config.label.selection')"
@@ -43,13 +42,10 @@
     </sw-upload-store-listener>
 
     <template v-if="products">
-
         <div v-if="element.config.productMediaHotspots.value[product.id]" v-for="product in products">
-
             <h4>{{ product.translated.name }}</h4>
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; grid-column-gap: 20px;">
-
                 <sw-text-field :placeholder="$tc('moorl-cms.elements.general.config.placeholder.topPosition')"
                                v-model="element.config.productMediaHotspots.value[product.id].top">
                 </sw-text-field>
@@ -57,11 +53,8 @@
                 <sw-text-field :placeholder="$tc('moorl-cms.elements.general.config.placeholder.leftPosition')"
                                v-model="element.config.productMediaHotspots.value[product.id].left">
                 </sw-text-field>
-
             </div>
-
         </div>
-
     </template>
 
     <sw-media-modal
@@ -75,5 +68,4 @@
         @media-modal-selection-change="onSelectionChanges"
         @modal-close="onCloseModal">
     </sw-media-modal>
-
 </div>
