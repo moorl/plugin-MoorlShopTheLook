@@ -17,15 +17,15 @@
         </template>
     </sw-entity-multi-select>
 
-    <sw-cms-mapping-field :label="$tc('sw-cms.elements.image.label')" valueTypes="entity" entity="media" v-model="element.config.media">
+    <sw-cms-mapping-field valueTypes="entity" entity="media" v-model="element.config.media">
         <sw-media-upload variant="regular"
-                            :uploadTag="uploadTag"
-                            :source="previewSource"
-                            :allowMultiSelect="false"
-                            :defaultFolder="cmsPageState.pageEntityName"
-                            :caption="$tc('sw-cms.elements.general.config.caption.mediaUpload')"
-                            @media-upload-sidebar-open="onOpenMediaModal"
-                            @media-upload-remove-image="onImageRemove">
+                         :uploadTag="uploadTag"
+                         :source="previewSource"
+                         :allowMultiSelect="false"
+                         :defaultFolder="cmsPageState.pageEntityName"
+                         :caption="$tc('sw-cms.elements.general.config.caption.mediaUpload')"
+                         @media-upload-sidebar-open="onOpenMediaModal"
+                         @media-upload-remove-image="onImageRemove">
         </sw-media-upload>
 
         <div class="sw-cms-el-config-image__mapping-preview" slot="preview" slot-scope="{ demoValue }">
@@ -36,11 +36,11 @@
         </div>
     </sw-cms-mapping-field>
 
-    <sw-upload-listener
+    <sw-upload-store-listener
         :uploadTag="uploadTag"
         autoUpload
         @media-upload-finish="onImageUpload">
-    </sw-upload-listener>
+    </sw-upload-store-listener>
 
     <template v-if="products">
 
