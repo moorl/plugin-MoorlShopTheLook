@@ -88,6 +88,7 @@
                 cursor: pointer;
                 transition: border-color 0.3s;
                 .hover-card {
+                    border-radius: $border-radius;
                     z-index: 20;
                     text-align: center;
                     display: none;
