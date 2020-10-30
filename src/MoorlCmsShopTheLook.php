@@ -2,7 +2,7 @@
 
 namespace MoorlCmsShopTheLook;
 
-use MoorlFoundation\Core\PluginHelpers;
+use MoorlFoundation\Core\PluginFoundation;
 use Shopware\Core\Framework\Plugin;
 use Shopware\Core\Framework\Plugin\Context\UninstallContext;
 use Symfony\Component\Config\FileLocator;
@@ -27,12 +27,11 @@ class MoorlCmsShopTheLook extends Plugin
             return;
         }
 
-        PluginHelpers::removeCmsBlocks($this->container, $context->getContext(), [
-            'moorl-shop-the-look'
-        ]);
+        /* @var $foundation PluginFoundation */
+        $foundation = $this->container->get(PluginFoundation::class);
+        $foundation->setContext($context->getContext());
 
-        PluginHelpers::removeCmsSlots($this->container, $context->getContext(), [
-            'moorl-shop-the-look'
-        ]);
+        $foundation->removeCmsSlots(['moorl-shop-the-look']);
+        $foundation->removeCmsBlocks(['moorl-shop-the-look']);
     }
 }
