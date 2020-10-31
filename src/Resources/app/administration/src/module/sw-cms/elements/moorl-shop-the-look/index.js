@@ -38,6 +38,26 @@ Application.getContainer('service').cmsService.registerCmsElement({
         style: {
             source: 'static',
             value: 'standard'
+        },
+        enableList: {
+            source: 'static',
+            value: true
+        },
+        enablePrices: {
+            source: 'static',
+            value: true
+        },
+        enableAddToCart: {
+            source: 'static',
+            value: true
+        },
+        enableDirectUrl: {
+            source: 'static',
+            value: false
+        },
+        enableAnimatedHotspots: {
+            source: 'static',
+            value: true
         }
     }
 });

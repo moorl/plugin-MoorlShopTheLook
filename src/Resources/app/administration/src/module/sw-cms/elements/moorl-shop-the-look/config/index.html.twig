@@ -1,4 +1,34 @@
 <div class="sw-cms-el-config-moorl-shop-the-look">
+    <sw-field v-model="element.config.enableList.value"
+              bordered
+              type="switch"
+              :label="$tc('moorl-foundation.cms.label.enableList')">
+    </sw-field>
+
+    <sw-field v-model="element.config.enablePrices.value"
+                  bordered
+                  type="switch"
+                  :label="$tc('moorl-foundation.cms.label.enablePrices')">
+    </sw-field>
+
+    <sw-field v-model="element.config.enableAddToCart.value"
+                  bordered
+                  type="switch"
+                  :label="$tc('moorl-foundation.cms.label.enableAddToCart')">
+    </sw-field>
+
+    <sw-field v-model="element.config.enableDirectUrl.value"
+              bordered
+              type="switch"
+              :label="$tc('moorl-foundation.cms.label.enableDirectUrl')">
+    </sw-field>
+
+    <sw-field v-model="element.config.enableAnimatedHotspots.value"
+              bordered
+              type="switch"
+              :label="$tc('moorl-foundation.cms.label.enableAnimatedHotspots')">
+    </sw-field>
+
     <sw-entity-multi-select
         class="sw-cms-el-config-product-slider__products"
         :label="$tc('sw-cms.elements.productSlider.config.label.selection')"

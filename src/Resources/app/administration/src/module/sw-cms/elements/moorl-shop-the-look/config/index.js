@@ -88,7 +88,6 @@ Component.register('sw-cms-el-config-moorl-shop-the-look', {
                         this.productCollection = result;
                     });
             }
-
         },
 
         onProductsChange() {
