@@ -2,9 +2,9 @@
 
 namespace MoorlCmsShopTheLook\Content;
 
-use Shopware\Core\Framework\Struct\Struct;
-use Shopware\Core\Content\Cms\SalesChannel\Struct\ProductSliderStruct;
 use Shopware\Core\Content\Cms\SalesChannel\Struct\ImageStruct;
+use Shopware\Core\Content\Cms\SalesChannel\Struct\ProductSliderStruct;
+use Shopware\Core\Framework\Struct\Struct;
 
 class MoorlShopTheLookStruct extends Struct
 {

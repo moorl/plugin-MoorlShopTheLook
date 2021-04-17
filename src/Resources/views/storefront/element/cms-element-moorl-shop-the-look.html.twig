@@ -37,7 +37,7 @@
                                     {% endif %}
                                     <h4>{{ product.translated.name }}</h4>
                                     {% if element.config.enablePrices.value %}
-                                        {% if context.currentCustomerGroup.id != shopware.config.MoorlCmsShopTheLook.config.customerGroup %}
+                                        {% if context.currentCustomerGroup.id != config('MoorlCmsShopTheLook.config.customerGroup') %}
                                             <p>{{ price.unitPrice|currency }}{{ "general.star"|trans|sw_sanitize }}</p>
                                         {% endif %}
                                     {% endif %}
@@ -97,7 +97,7 @@
                                     >{{ product.translated.name }}</a>
                                 </h4>
                                 {% if element.config.enablePrices.value %}
-                                    {% if context.currentCustomerGroup.id != shopware.config.MoorlCmsShopTheLook.config.customerGroup %}
+                                    {% if context.currentCustomerGroup.id != config('MoorlCmsShopTheLook.config.customerGroup') %}
                                         <div class="product-list-content-item-info-price">
                                             {{ price.unitPrice|currency }}{{ "general.star"|trans|sw_sanitize }}
                                         </div>
@@ -109,7 +109,7 @@
                 </div>
 
                 {% if element.config.enableAddToCart.value %}
-                    {% if context.currentCustomerGroup.id != shopware.config.MoorlCmsShopTheLook.config.customerGroup %}
+                    {% if context.currentCustomerGroup.id != config('MoorlCmsShopTheLook.config.customerGroup') %}
                         <hr>
                         <div class="product-list-buy">
                             <div class="product-list-buy-price">

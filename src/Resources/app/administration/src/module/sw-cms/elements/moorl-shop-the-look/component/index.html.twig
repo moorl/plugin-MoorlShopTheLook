@@ -2,13 +2,13 @@
     <div class="hotspot-area">
         <div class="hotspot-area-image">
             <img :src="mediaUrl">
-            <div class="hotspot-area-image-overlay">
+            <div class="hotspot-area-image-overlay" ref="hotspotArea">
                 <template v-if="element.data.products">
                     <div v-if="element.config.productMediaHotspots.value[product.id]"
                          v-for="product in element.data.products"
-                         :title="product.name"
+                         :style="{'top': element.config.productMediaHotspots.value[product.id].top, 'left': element.config.productMediaHotspots.value[product.id].left}"
                          class="hotspot-area-image-overlay-dot"
-                         :style="{'top': element.config.productMediaHotspots.value[product.id].top, 'left': element.config.productMediaHotspots.value[product.id].left}">
+                         v-tooltip="{message: product.name, position: 'top'}">
                     </div>
                 </template>
             </div>

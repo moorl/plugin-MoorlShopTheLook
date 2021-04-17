@@ -2,20 +2,20 @@
 
 namespace MoorlCmsShopTheLook\Content;
 
-use Shopware\Core\Content\Media\Cms\ImageCmsElementResolver;
-use Shopware\Core\Content\Media\Cms\ProductSliderCmsElementResolver;
-use Shopware\Core\Content\Cms\DataResolver\Element\AbstractCmsElementResolver;
-use Shopware\Core\Content\Cms\DataResolver\CriteriaCollection;
-use Shopware\Core\Content\Cms\SalesChannel\Struct\ProductSliderStruct;
-use Shopware\Core\Content\Cms\SalesChannel\Struct\ImageStruct;
-use Shopware\Core\Content\Product\ProductDefinition;
-use Shopware\Core\Content\Media\MediaDefinition;
 use Shopware\Core\Content\Cms\Aggregate\CmsSlot\CmsSlotEntity;
+use Shopware\Core\Content\Cms\DataResolver\CriteriaCollection;
+use Shopware\Core\Content\Cms\DataResolver\Element\AbstractCmsElementResolver;
 use Shopware\Core\Content\Cms\DataResolver\Element\ElementDataCollection;
 use Shopware\Core\Content\Cms\DataResolver\FieldConfig;
 use Shopware\Core\Content\Cms\DataResolver\ResolverContext\EntityResolverContext;
 use Shopware\Core\Content\Cms\DataResolver\ResolverContext\ResolverContext;
+use Shopware\Core\Content\Cms\SalesChannel\Struct\ImageStruct;
+use Shopware\Core\Content\Cms\SalesChannel\Struct\ProductSliderStruct;
+use Shopware\Core\Content\Media\Cms\ProductSliderCmsElementResolver;
+use Shopware\Core\Content\Media\MediaDefinition;
 use Shopware\Core\Content\Media\MediaEntity;
+use Shopware\Core\Content\Product\ProductCollection;
+use Shopware\Core\Content\Product\ProductDefinition;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
 
 class MoorlShopTheLookTypeDataResolver extends AbstractCmsElementResolver
@@ -121,5 +121,4 @@ class MoorlShopTheLookTypeDataResolver extends AbstractCmsElementResolver
 
         $slider->setProducts($products);
     }
-
 }
