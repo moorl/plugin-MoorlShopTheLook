@@ -31,6 +31,26 @@ Application.getContainer('service').cmsService.registerCmsElement({
                 name: 'media'
             }
         },
+        videoActive: {
+            source: 'static',
+            value: false
+        },
+        custom1: {
+            source: 'static',
+            value: ""
+        },
+        custom2: {
+            source: 'static',
+            value: ""
+        },
+        custom3: {
+            source: 'static',
+            value: ""
+        },
+        custom4: {
+            source: 'static',
+            value: ""
+        },
         productMediaHotspots: {
             source: 'static',
             value: {}

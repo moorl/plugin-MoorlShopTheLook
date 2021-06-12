@@ -56,6 +56,12 @@
                         @media-upload-remove-image="onImageRemove">
     </sw-media-upload-v2>
 
+    <sw-upload-listener
+        :uploadTag="uploadTag"
+        autoUpload
+        @media-upload-finish="onImageUpload">
+    </sw-upload-listener>
+
     <div class="sw-cms-el-config-image__mapping-preview" slot="preview" slot-scope="{ demoValue }">
         <img :src="demoValue.url" v-if="demoValue.url">
         <sw-alert class="sw-cms-el-config-image__preview-info" variant="info" v-else>
@@ -63,11 +69,11 @@
         </sw-alert>
     </div>
 
-    <sw-upload-listener
-        :uploadTag="uploadTag"
-        autoUpload
-        @media-upload-finish="onImageUpload">
-    </sw-upload-listener>
+    <sw-field v-model="element.config.videoActive.value"
+              bordered
+              type="switch"
+              :label="$tc('moorl-foundation.cms.label.videoActive')">
+    </sw-field>
 
     <template v-if="products">
         <div v-if="element.config.productMediaHotspots.value[product.id]" v-for="product in products">
@@ -84,6 +90,22 @@
             </div>
         </div>
     </template>
+
+    <sw-field v-model="element.config.custom1.value"
+              :label="$tc('moorl-foundation.properties.custom1')">
+    </sw-field>
+
+    <sw-field v-model="element.config.custom2.value"
+              :label="$tc('moorl-foundation.properties.custom2')">
+    </sw-field>
+
+    <sw-field v-model="element.config.custom3.value"
+              :label="$tc('moorl-foundation.properties.custom3')">
+    </sw-field>
+
+    <sw-field v-model="element.config.custom4.value"
+              :label="$tc('moorl-foundation.properties.custom4')">
+    </sw-field>
 
     <sw-media-modal-v2
         variant="regular"

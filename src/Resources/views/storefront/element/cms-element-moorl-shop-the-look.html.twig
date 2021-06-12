@@ -3,7 +3,14 @@
     <div class="cms-element-{{ element.type }}">
         <div class="{% if element.config.enableList.value %}hotspot-area{% else %}w-100{% endif %}">
             <div class="hotspot-area-image">
-                <img src="{{ element.data.media.media.url }}" alt="{{ element.data.media.media.alt }}">
+                {% if element.config.videoActive.value %}
+                    <video class="video" playsinline preload="none" muted autoplay loop>
+                        <source src="{{ element.data.media.media.url }}" type="{{ element.data.media.media.mimeType }}">
+                    </video>
+                {% else %}
+                    <img src="{{ element.data.media.media.url }}" alt="{{ element.data.media.media.alt }}">
+                {% endif %}
+
                 <div class="hotspot-area-image-overlay">
                     {% for product in element.data.products.products %}
                         {% set price = product.calculatedPrice %}
