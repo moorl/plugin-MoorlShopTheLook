@@ -17,7 +17,8 @@ Component.register('sw-cms-el-config-moorl-shop-the-look', {
         return {
             productCollection: null,
             mediaModalIsOpen: false,
-            initialFolderId: null
+            initialFolderId: null,
+            snippetPrefix: 'sw-cms.elements.moorl-shop-the-look.',
         };
     },
 

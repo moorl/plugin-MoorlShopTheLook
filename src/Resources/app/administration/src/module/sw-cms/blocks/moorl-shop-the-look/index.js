@@ -4,7 +4,7 @@ import './preview';
 Shopware.Service('cmsService').registerCmsBlock({
     name: 'moorl-shop-the-look',
     label: 'moorl-cms.blocks.general.shopTheLook.label',
-    category: 'moorl-cms',
+    category: 'moorl-cms-old',
     component: 'sw-cms-block-moorl-shop-the-look',
     previewComponent: 'sw-cms-preview-moorl-shop-the-look',
     defaultConfig: {

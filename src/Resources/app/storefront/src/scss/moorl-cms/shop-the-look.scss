@@ -63,11 +63,8 @@
                 .product-list-content-item-info-price {
                     text-align: right;
                 }
-
             }
-
         }
-
     }
 
     .product-list-buy {
@@ -86,7 +83,6 @@
                 margin-left: 5px;
             }
         }
-
     }
 
     .hotspot-area-image {
@@ -161,6 +157,17 @@
                         line-height: 18px;
                     }
 
+                    &.hover-card-top {
+                        top: auto;
+                        bottom: 30px;
+
+                        &:before {
+                            top: auto;
+                            bottom: -10px;
+                            border-width: 10px 15px 0 15px;
+                            border-color: rgba($body-bg, 80%) transparent transparent transparent;
+                        }
+                    }
                 }
                 &:focus,
                 &:hover,

@@ -8,9 +8,9 @@ use Shopware\Core\Framework\Struct\Struct;
 
 class MoorlShopTheLookStruct extends Struct
 {
-    protected $media;
+    protected ImageStruct $media;
 
-    protected $products;
+    protected ProductSliderStruct $products;
 
     public function getMedia(): ImageStruct
     {

@@ -2,31 +2,31 @@
     <sw-field v-model="element.config.enableList.value"
               bordered
               type="switch"
-              :label="$tc('moorl-foundation.cms.label.enableList')">
+              :label="$tc(snippetPrefix + 'label.enableList')">
     </sw-field>
 
     <sw-field v-model="element.config.enablePrices.value"
                   bordered
                   type="switch"
-                  :label="$tc('moorl-foundation.cms.label.enablePrices')">
+                  :label="$tc(snippetPrefix + 'label.enablePrices')">
     </sw-field>
 
     <sw-field v-model="element.config.enableAddToCart.value"
                   bordered
                   type="switch"
-                  :label="$tc('moorl-foundation.cms.label.enableAddToCart')">
+                  :label="$tc(snippetPrefix + 'label.enableAddToCart')">
     </sw-field>
 
     <sw-field v-model="element.config.enableDirectUrl.value"
               bordered
               type="switch"
-              :label="$tc('moorl-foundation.cms.label.enableDirectUrl')">
+              :label="$tc(snippetPrefix + 'label.enableDirectUrl')">
     </sw-field>
 
     <sw-field v-model="element.config.enableAnimatedHotspots.value"
               bordered
               type="switch"
-              :label="$tc('moorl-foundation.cms.label.enableAnimatedHotspots')">
+              :label="$tc(snippetPrefix + 'label.enableAnimatedHotspots')">
     </sw-field>
 
     <sw-entity-multi-select
@@ -72,19 +72,25 @@
     <sw-field v-model="element.config.videoActive.value"
               bordered
               type="switch"
-              :label="$tc('moorl-foundation.cms.label.videoActive')">
+              :label="$tc(snippetPrefix + 'label.videoActive')">
     </sw-field>
 
     <template v-if="products">
+        <div class="sw-field">
+            {{ $tc(snippetPrefix + 'label.positionDescription') }}
+        </div>
+
         <div v-if="element.config.productMediaHotspots.value[product.id]" v-for="product in products">
-            <h4>{{ product.translated.name }}</h4>
+            <p>
+                {{ product.translated.name }}
+            </p>
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; grid-column-gap: 20px;">
-                <sw-text-field :placeholder="$tc('moorl-cms.elements.general.config.placeholder.topPosition')"
+                <sw-text-field :placeholder="$tc(snippetPrefix + 'label.topPosition')"
                                v-model="element.config.productMediaHotspots.value[product.id].top">
                 </sw-text-field>
 
-                <sw-text-field :placeholder="$tc('moorl-cms.elements.general.config.placeholder.leftPosition')"
+                <sw-text-field :placeholder="$tc(snippetPrefix + 'label.leftPosition')"
                                v-model="element.config.productMediaHotspots.value[product.id].left">
                 </sw-text-field>
             </div>
@@ -92,19 +98,19 @@
     </template>
 
     <sw-field v-model="element.config.custom1.value"
-              :label="$tc('moorl-foundation.properties.custom1')">
+              :label="$tc(snippetPrefix + 'label.custom1')">
     </sw-field>
 
     <sw-field v-model="element.config.custom2.value"
-              :label="$tc('moorl-foundation.properties.custom2')">
+              :label="$tc(snippetPrefix + 'label.custom2')">
     </sw-field>
 
     <sw-field v-model="element.config.custom3.value"
-              :label="$tc('moorl-foundation.properties.custom3')">
+              :label="$tc(snippetPrefix + 'label.custom3')">
     </sw-field>
 
     <sw-field v-model="element.config.custom4.value"
-              :label="$tc('moorl-foundation.properties.custom4')">
+              :label="$tc(snippetPrefix + 'label.custom4')">
     </sw-field>
 
     <sw-media-modal-v2

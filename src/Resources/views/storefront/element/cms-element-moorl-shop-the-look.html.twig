@@ -1,5 +1,6 @@
 {% block element_moorl_shop_the_look %}
     {% set priceTotal = 0 %}
+
     <div class="cms-element-{{ element.type }}">
         <div class="{% if element.config.enableList.value %}hotspot-area{% else %}w-100{% endif %}">
             <div class="hotspot-area-image">
@@ -14,6 +15,7 @@
                 <div class="hotspot-area-image-overlay">
                     {% for product in element.data.products.products %}
                         {% set price = product.calculatedPrice %}
+                        {% set positionTop = element.config.productMediaHotspots.value[product.id].top|trim('%')|number_format %}
 
                         {% if page.product.calculatedPrices|length == 1 %}
                             {% set price = product.calculatedPrices.first %}
@@ -33,7 +35,7 @@
                                  tabindex="-1"
                                  style="top: {{ element.config.productMediaHotspots.value[product.id].top }}; left: {{ element.config.productMediaHotspots.value[product.id].left }}">
                                 {% if element.config.enableAnimatedHotspots.value %}<div class="pulse"></div>{% endif %}
-                                <div class="hover-card">
+                                <div class="hover-card {% if positionTop > 50 %}hover-card-top{% endif %}">
                                     {% if product.cover.media.url %}
                                         {% set attributes = {
                                             'alt': product.translated.name

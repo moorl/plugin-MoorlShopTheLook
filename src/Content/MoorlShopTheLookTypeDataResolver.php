@@ -20,7 +20,6 @@ use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
 
 class MoorlShopTheLookTypeDataResolver extends AbstractCmsElementResolver
 {
-
     public function getType(): string
     {
         return 'moorl-shop-the-look';

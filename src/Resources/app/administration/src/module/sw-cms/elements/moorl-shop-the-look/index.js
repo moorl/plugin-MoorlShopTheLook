@@ -9,7 +9,7 @@ criteria.addAssociation('cover');
 
 Application.getContainer('service').cmsService.registerCmsElement({
     name: 'moorl-shop-the-look',
-    label: 'Shop The Look',
+    label: 'sw-cms.elements.moorl-shop-the-look.title',
     component: 'sw-cms-el-moorl-shop-the-look',
     configComponent: 'sw-cms-el-config-moorl-shop-the-look',
     previewComponent: 'sw-cms-el-preview-moorl-shop-the-look',
