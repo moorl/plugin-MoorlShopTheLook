@@ -87,6 +87,7 @@ Component.register('sw-cms-el-config-moorl-shop-the-look', {
                 this.productRepository.search(criteria, Object.assign({}, Shopware.Context.api, { inheritance: true }))
                     .then(result => {
                         this.productCollection = result;
+                        this.onProductsChange();
                     });
             }
         },

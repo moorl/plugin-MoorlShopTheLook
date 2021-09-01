@@ -4,6 +4,7 @@
             "moorl-shop-the-look": {
                 "title": "Shop-The-Look",
                 "label": {
+                    "videoActive": "Video active",
                     "positionDescription": "Use `0%` to `100%` for the Positioning of your Hotspots (Top, Left)",
                     "enableList": "Enable Product List",
                     "enablePrices": "Show Prices",
