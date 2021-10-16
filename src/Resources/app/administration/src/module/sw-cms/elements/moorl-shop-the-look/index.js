@@ -28,7 +28,8 @@ Application.getContainer('service').cmsService.registerCmsElement({
             value: null,
             required: true,
             entity: {
-                name: 'media'
+                name: 'media',
+                criteria: new Criteria()
             }
         },
         videoActive: {

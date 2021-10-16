@@ -15,7 +15,7 @@
                 <template v-if="element.data.products">
                     <div v-if="element.config.productMediaHotspots.value[product.id]"
                          v-for="product in element.data.products"
-                         :style="{'top': element.config.productMediaHotspots.value[product.id].top, 'left': element.config.productMediaHotspots.value[product.id].left}"
+                         :style="pointerPositionCss(product.id)"
                          class="hotspot-area-image-overlay-dot"
                          v-tooltip="{message: product.name, position: 'top'}">
                     </div>
@@ -23,6 +23,7 @@
             </div>
         </div>
     </div>
+
     <div class="product-list">
         <div class="product-list-content">
             <template v-if="element.data.products">

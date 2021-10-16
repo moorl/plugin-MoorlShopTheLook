@@ -63,6 +63,18 @@ Component.register('sw-cms-el-config-moorl-shop-the-look', {
             }
 
             return this.element.config.media.value;
+        },
+
+        mediaUrl() {
+            const context = Shopware.Context.api;
+            const elemData = this.element.data.media;
+            if (elemData && elemData.id) {
+                return elemData.url;
+            }
+            if (elemData && elemData.url) {
+                return `${context.assetsPath}${elemData.url}`;
+            }
+            return `${context.assetsPath}/administration/static/img/cms/preview_mountain_large.jpg`;
         }
     },
 
@@ -75,10 +87,14 @@ Component.register('sw-cms-el-config-moorl-shop-the-look', {
             this.initElementConfig('moorl-shop-the-look');
             this.initElementData('moorl-shop-the-look');
 
+            if (typeof this.previewSource === 'string') {
+                this.mediaRepository.get(this.previewSource, Shopware.Context.api).then(result => {
+                    this.element.data.media = result;
+                });
+            }
+
             this.productCollection = new EntityCollection('/product', 'product', Shopware.Context.api);
 
-            // We have to fetch the assigned entities again
-            // ToDo: Fix with NEXT-4830
             if (this.element.config.products.value.length > 0) {
                 const criteria = new Criteria(1, 100);
                 criteria.addAssociation('cover');
@@ -100,13 +116,27 @@ Component.register('sw-cms-el-config-moorl-shop-the-look', {
             this.element.config.products.value.forEach(function(id) {
                 if (!_that.element.config.productMediaHotspots.value[id]) {
                     _that.element.config.productMediaHotspots.value[id] = {
-                        top: '50%',
-                        left: '50%'
+                        top: 50,
+                        left: 50
                     };
                 }
+
+                _that.element.config.productMediaHotspots.value[id].top = parseInt(_that.element.config.productMediaHotspots.value[id].top);
+                _that.element.config.productMediaHotspots.value[id].left = parseInt(_that.element.config.productMediaHotspots.value[id].left);
             });
 
             this.$set(this.element.data, 'products', this.productCollection);
+        },
+
+        pointerPositionCss(id) {
+            try {
+                return {
+                    top: this.element.config.productMediaHotspots.value[id].top + '%',
+                    left: this.element.config.productMediaHotspots.value[id].left + '%'
+                }
+            } catch (exception) {
+                return {};
+            }
         },
 
         async onImageUpload({ targetId }) {

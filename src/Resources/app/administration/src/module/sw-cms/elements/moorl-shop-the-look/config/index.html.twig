@@ -1,117 +1,180 @@
 <div class="sw-cms-el-config-moorl-shop-the-look">
-    <sw-field v-model="element.config.enableList.value"
-              bordered
-              type="switch"
-              :label="$tc(snippetPrefix + 'label.enableList')">
-    </sw-field>
+    <sw-tabs defaultItem="general">
+        <template slot-scope="{ active }" >
+            <sw-tabs-item :title="$tc(snippetPrefix + 'tab.general')"
+                          name="general"
+                          :activeTab="active">
+                {{ $tc(snippetPrefix + 'tab.general') }}
+            </sw-tabs-item>
 
-    <sw-field v-model="element.config.enablePrices.value"
-                  bordered
-                  type="switch"
-                  :label="$tc(snippetPrefix + 'label.enablePrices')">
-    </sw-field>
+            <sw-tabs-item v-if="products"
+                          :title="$tc(snippetPrefix + 'tab.hotspots')"
+                          name="hotspots"
+                          :activeTab="active">
+                {{ $tc(snippetPrefix + 'tab.hotspots') }}
+            </sw-tabs-item>
 
-    <sw-field v-model="element.config.enableAddToCart.value"
-                  bordered
-                  type="switch"
-                  :label="$tc(snippetPrefix + 'label.enableAddToCart')">
-    </sw-field>
-
-    <sw-field v-model="element.config.enableDirectUrl.value"
-              bordered
-              type="switch"
-              :label="$tc(snippetPrefix + 'label.enableDirectUrl')">
-    </sw-field>
-
-    <sw-field v-model="element.config.enableAnimatedHotspots.value"
-              bordered
-              type="switch"
-              :label="$tc(snippetPrefix + 'label.enableAnimatedHotspots')">
-    </sw-field>
-
-    <sw-entity-multi-select
-        class="sw-cms-el-config-product-slider__products"
-        :label="$tc('sw-cms.elements.productSlider.config.label.selection')"
-        :placeholder="$tc('sw-cms.elements.productSlider.config.placeholder.selection')"
-        v-model="productCollection"
-        @change="onProductsChange"
-        :context="productMultiSelectContext"
-        :criteria="productMediaFilter">
-        <template #result-label-property="{ item, index, labelProperty, searchTerm, getKey }">
-            <sw-highlight-text
-                :text="getKey(item,labelProperty) || getKey(item, `translated.${labelProperty}`)"
-                :searchTerm="searchTerm">
-            </sw-highlight-text>
-            <span class="sw-cms-el-config-product-slider__select-product-number">{{ item.productNumber }}</span>
+            <sw-tabs-item :title="$tc(snippetPrefix + 'tab.other')"
+                          name="other"
+                          :activeTab="active">
+                {{ $tc(snippetPrefix + 'tab.other') }}
+            </sw-tabs-item>
         </template>
-    </sw-entity-multi-select>
 
-    <sw-media-upload-v2 variant="regular"
+        <template slot="content" slot-scope="{ active }">
+            <sw-container v-if="active === 'general'">
+                <sw-container columns="1fr 1fr" gap="0 10px">
+                    <sw-field v-model="element.config.enableList.value"
+                              bordered
+                              type="switch"
+                              :label="$tc(snippetPrefix + 'label.enableList')">
+                    </sw-field>
+
+                    <sw-field v-model="element.config.enablePrices.value"
+                              bordered
+                              type="switch"
+                              :label="$tc(snippetPrefix + 'label.enablePrices')">
+                    </sw-field>
+
+                    <sw-field v-model="element.config.enableAddToCart.value"
+                              bordered
+                              type="switch"
+                              :label="$tc(snippetPrefix + 'label.enableAddToCart')">
+                    </sw-field>
+
+                    <sw-field v-model="element.config.enableDirectUrl.value"
+                              bordered
+                              type="switch"
+                              :label="$tc(snippetPrefix + 'label.enableDirectUrl')">
+                    </sw-field>
+
+                    <sw-field v-model="element.config.enableAnimatedHotspots.value"
+                              bordered
+                              type="switch"
+                              :label="$tc(snippetPrefix + 'label.enableAnimatedHotspots')">
+                    </sw-field>
+
+                    <sw-field v-model="element.config.videoActive.value"
+                              bordered
+                              type="switch"
+                              :label="$tc(snippetPrefix + 'label.videoActive')">
+                    </sw-field>
+                </sw-container>
+
+                <sw-media-upload-v2 variant="regular"
+                                    :uploadTag="uploadTag"
+                                    :source="previewSource"
+                                    :allowMultiSelect="false"
+                                    :defaultFolder="cmsPageState.pageEntityName"
+                                    :caption="$tc('sw-cms.elements.general.config.caption.mediaUpload')"
+                                    @media-upload-sidebar-open="onOpenMediaModal"
+                                    @media-upload-remove-image="onImageRemove">
+                </sw-media-upload-v2>
+
+                <sw-upload-listener
                         :uploadTag="uploadTag"
-                        :source="previewSource"
-                        :allowMultiSelect="false"
-                        :defaultFolder="cmsPageState.pageEntityName"
-                        :caption="$tc('sw-cms.elements.general.config.caption.mediaUpload')"
-                        @media-upload-sidebar-open="onOpenMediaModal"
-                        @media-upload-remove-image="onImageRemove">
-    </sw-media-upload-v2>
+                        autoUpload
+                        @media-upload-finish="onImageUpload">
+                </sw-upload-listener>
 
-    <sw-upload-listener
-        :uploadTag="uploadTag"
-        autoUpload
-        @media-upload-finish="onImageUpload">
-    </sw-upload-listener>
+                <sw-entity-multi-select
+                        class="sw-cms-el-config-product-slider__products"
+                        :label="$tc('sw-cms.elements.productSlider.config.label.selection')"
+                        :placeholder="$tc('sw-cms.elements.productSlider.config.placeholder.selection')"
+                        v-model="productCollection"
+                        @change="onProductsChange"
+                        :context="productMultiSelectContext"
+                        :criteria="productMediaFilter">
+                    <template #result-label-property="{ item, index, labelProperty, searchTerm, getKey }">
+                        <sw-highlight-text
+                                :text="getKey(item,labelProperty) || getKey(item, `translated.${labelProperty}`)"
+                                :searchTerm="searchTerm">
+                        </sw-highlight-text>
+                        <span class="sw-cms-el-config-product-slider__select-product-number">{{ item.productNumber }}</span>
+                    </template>
+                </sw-entity-multi-select>
+            </sw-container>
 
-    <div class="sw-cms-el-config-image__mapping-preview" slot="preview" slot-scope="{ demoValue }">
-        <img :src="demoValue.url" v-if="demoValue.url">
-        <sw-alert class="sw-cms-el-config-image__preview-info" variant="info" v-else>
-            {{ $tc('sw-cms.detail.label.mappingEmptyPreview') }}
-        </sw-alert>
-    </div>
+            <sw-container v-if="products && active === 'hotspots'">
+                <div class="hotspots">
+                    <div class="hotspot-area">
+                        <div class="hotspot-area-image">
+                            <video v-if="element.config.videoActive.value"
+                                   autoplay
+                                   muted
+                                   loop
+                                   class="video">
+                                <source :src="mediaUrl" type="video/mp4">
+                            </video>
 
-    <sw-field v-model="element.config.videoActive.value"
-              bordered
-              type="switch"
-              :label="$tc(snippetPrefix + 'label.videoActive')">
-    </sw-field>
+                            <img v-else :src="mediaUrl">
 
-    <template v-if="products">
-        <div class="sw-field">
-            {{ $tc(snippetPrefix + 'label.positionDescription') }}
-        </div>
+                            <div class="hotspot-area-image-overlay" ref="hotspotArea">
+                                <template v-if="element.data.products">
+                                    <div v-if="element.config.productMediaHotspots.value[product.id]"
+                                         v-for="product in element.data.products"
+                                         :style="pointerPositionCss(product.id)"
+                                         class="hotspot-area-image-overlay-dot"
+                                         v-tooltip="{message: product.name, position: 'top'}">
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
 
-        <div v-if="element.config.productMediaHotspots.value[product.id]" v-for="product in products">
-            <p>
-                {{ product.translated.name }}
-            </p>
+                    <div class="product-list">
+                        <div class="product-list-content">
+                            <div v-if="element.config.productMediaHotspots.value[product.id]"
+                                 v-for="product in products"
+                                 class="product-list-content-item">
+                                <div style="grid-area: a;">{{ product.translated.name }}</div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; grid-column-gap: 20px;">
-                <sw-text-field :placeholder="$tc(snippetPrefix + 'label.topPosition')"
-                               v-model="element.config.productMediaHotspots.value[product.id].top">
-                </sw-text-field>
+                                <sw-field style="grid-area: b;"
+                                          type="number"
+                                          min="0"
+                                          max="100"
+                                          step="1"
+                                          :placeholder="$tc(snippetPrefix + 'label.topPosition')"
+                                          v-model="element.config.productMediaHotspots.value[product.id].top">
+                                </sw-field>
 
-                <sw-text-field :placeholder="$tc(snippetPrefix + 'label.leftPosition')"
-                               v-model="element.config.productMediaHotspots.value[product.id].left">
-                </sw-text-field>
-            </div>
-        </div>
-    </template>
+                                <sw-field style="grid-area: c;"
+                                          type="number"
+                                          min="0"
+                                          max="100"
+                                          step="1"
+                                          :placeholder="$tc(snippetPrefix + 'label.leftPosition')"
+                                          v-model="element.config.productMediaHotspots.value[product.id].left">
+                                </sw-field>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </sw-container>
 
-    <sw-field v-model="element.config.custom1.value"
-              :label="$tc(snippetPrefix + 'label.custom1')">
-    </sw-field>
+            <sw-container v-if="active === 'other'">
+                <sw-container columns="1fr 1fr" gap="0 10px">
+                    <sw-field v-model="element.config.custom1.value"
+                              :label="$tc(snippetPrefix + 'label.custom1')">
+                    </sw-field>
 
-    <sw-field v-model="element.config.custom2.value"
-              :label="$tc(snippetPrefix + 'label.custom2')">
-    </sw-field>
+                    <sw-field v-model="element.config.custom2.value"
+                              :label="$tc(snippetPrefix + 'label.custom2')">
+                    </sw-field>
 
-    <sw-field v-model="element.config.custom3.value"
-              :label="$tc(snippetPrefix + 'label.custom3')">
-    </sw-field>
+                    <sw-field v-model="element.config.custom3.value"
+                              :label="$tc(snippetPrefix + 'label.custom3')">
+                    </sw-field>
 
-    <sw-field v-model="element.config.custom4.value"
-              :label="$tc(snippetPrefix + 'label.custom4')">
-    </sw-field>
+                    <sw-field v-model="element.config.custom4.value"
+                              :label="$tc(snippetPrefix + 'label.custom4')">
+                    </sw-field>
+                </sw-container>
+            </sw-container>
+        </template>
+
+
+    </sw-tabs>
 
     <sw-media-modal-v2
         variant="regular"

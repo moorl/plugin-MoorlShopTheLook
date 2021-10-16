@@ -14,7 +14,7 @@ Component.register('sw-cms-el-moorl-shop-the-look', {
             const context = Shopware.Context.api;
             const elemData = this.element.data.media;
             if (elemData && elemData.id) {
-                return this.element.data.media.url;
+                return elemData.url;
             }
             if (elemData && elemData.url) {
                 return `${context.assetsPath}${elemData.url}`;
@@ -57,26 +57,19 @@ Component.register('sw-cms-el-moorl-shop-the-look', {
             this.initElementData('moorl-shop-the-look');
         },
 
-        calcPercent(id, x, y) {
-            let w = this.$refs.hotspotArea.clientWidth;
-            let h = this.$refs.hotspotArea.clientHeight;
-            let Xpercent = Math.round(x / w * 100);
-            let Ypercent = Math.round(y / h * 100);
-
-            this.element.config.productMediaHotspots.value[id].top = Ypercent + '%';
-            this.element.config.productMediaHotspots.value[id].left = Xpercent + '%';
-        },
-
         pointerPositionCss(id) {
             try {
+                this.element.config.productMediaHotspots.value[id].top = parseInt(this.element.config.productMediaHotspots.value[id].top);
+                this.element.config.productMediaHotspots.value[id].left = parseInt(this.element.config.productMediaHotspots.value[id].left);
+
                 return {
-                    top: this.element.config.productMediaHotspots.value[id].top,
-                    left: this.element.config.productMediaHotspots.value[id].left
+                    top: this.element.config.productMediaHotspots.value[id].top + '%',
+                    left: this.element.config.productMediaHotspots.value[id].left + '%'
                 }
             } catch (exception) {
                 return {};
             }
-        }
+        },
     },
 
     filters: {

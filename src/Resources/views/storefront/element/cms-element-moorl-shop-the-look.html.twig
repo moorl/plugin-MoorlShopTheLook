@@ -33,7 +33,7 @@
                         {% else %}
                             <div class="hotspot-area-image-overlay-dot"
                                  tabindex="-1"
-                                 style="top: {{ element.config.productMediaHotspots.value[product.id].top }}; left: {{ element.config.productMediaHotspots.value[product.id].left }}">
+                                 style="top: {{ element.config.productMediaHotspots.value[product.id].top }}%; left: {{ element.config.productMediaHotspots.value[product.id].left }}%">
                                 {% if element.config.enableAnimatedHotspots.value %}<div class="pulse"></div>{% endif %}
                                 <div class="hover-card {% if positionTop > 50 %}hover-card-top{% endif %}">
                                     {% if product.cover.media.url %}
@@ -44,12 +44,15 @@
                                     {% else %}
                                         {% sw_icon 'placeholder' style {'size': 'fluid'} %}
                                     {% endif %}
+
                                     <h4>{{ product.translated.name }}</h4>
+
                                     {% if element.config.enablePrices.value %}
                                         {% if context.currentCustomerGroup.id != config('MoorlCmsShopTheLook.config.customerGroup') %}
                                             <p>{{ price.unitPrice|currency }}{{ "general.star"|trans|sw_sanitize }}</p>
                                         {% endif %}
                                     {% endif %}
+
                                     <a href="{{ seoUrl('frontend.detail.page', {'productId': product.id}) }}"
                                        class="btn btn-block btn-primary btn-buy"
                                        data-modal-class="quickview-modal"

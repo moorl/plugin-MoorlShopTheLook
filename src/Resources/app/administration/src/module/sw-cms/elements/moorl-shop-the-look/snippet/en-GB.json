@@ -17,6 +17,11 @@
                     "custom4": "Custom Field 4",
                     "topPosition": "Position Top",
                     "leftPosition": "Position Left"
+                },
+                "tab": {
+                    "general": "General",
+                    "hotspots": "Hotspots",
+                    "other": "Other"
                 }
             }
         }
