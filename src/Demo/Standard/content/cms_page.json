@@ -79,20 +79,20 @@
                   "productMediaHotspots": {
                     "value": {
                       "{ID:PRODUCT_0}": {
-                        "top": "40%",
-                        "left": "25%"
+                        "top": "40",
+                        "left": "25"
                       },
                       "{ID:PRODUCT_1}": {
-                        "top": "75%",
-                        "left": "75%"
+                        "top": "75",
+                        "left": "75"
                       },
                       "{ID:PRODUCT_2}": {
-                        "top": "54%",
-                        "left": "75%"
+                        "top": "54",
+                        "left": "75"
                       },
                       "{ID:PRODUCT_3}": {
-                        "top": "82%",
-                        "left": "45%"
+                        "top": "82",
+                        "left": "45"
                       }
                     },
                     "source": "static"
