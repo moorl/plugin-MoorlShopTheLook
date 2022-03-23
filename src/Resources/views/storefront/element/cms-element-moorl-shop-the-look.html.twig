@@ -15,11 +15,11 @@
                 <div class="hotspot-area-image-overlay">
                     {% for product in element.data.products.products %}
                         {% set price = product.calculatedPrice %}
-                        {% set positionTop = element.config.productMediaHotspots.value[product.id].top|trim('%')|number_format %}
-
-                        {% if page.product.calculatedPrices|length == 1 %}
-                            {% set price = product.calculatedPrices.first %}
+                        {% if product.calculatedPrices|length > 0 %}
+                            {% set price = product.calculatedPrices.first() %}
                         {% endif %}
+
+                        {% set positionTop = element.config.productMediaHotspots.value[product.id].top|trim('%')|number_format %}
 
                         {% if element.config.enableDirectUrl.value %}
                             <a href="{{ seoUrl('frontend.detail.page', {'productId': product.id}) }}"
@@ -77,9 +77,8 @@
                 <div class="product-list-content">
                     {% for product in element.data.products.products %}
                         {% set price = product.calculatedPrice %}
-
-                        {% if page.product.calculatedPrices|length == 1 %}
-                            {% set price = product.calculatedPrices.first %}
+                        {% if product.calculatedPrices|length > 0 %}
+                            {% set price = product.calculatedPrices.first() %}
                         {% endif %}
 
                         {% set priceTotal = priceTotal + price.unitPrice %}
