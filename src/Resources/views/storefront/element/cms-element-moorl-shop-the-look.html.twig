@@ -1,72 +1,75 @@
 {% block element_moorl_shop_the_look %}
     {% set priceTotal = 0 %}
 
-    <div class="cms-element-{{ element.type }}">
-        <div class="{% if element.config.enableList.value %}hotspot-area{% else %}w-100{% endif %}">
-            <div class="hotspot-area-image">
-                {% if element.config.videoActive.value %}
-                    <video class="video" playsinline preload="none" muted autoplay loop>
-                        <source src="{{ element.data.media.media.url }}" type="{{ element.data.media.media.mimeType }}">
-                    </video>
-                {% else %}
-                    <img src="{{ element.data.media.media.url }}" alt="{{ element.data.media.media.alt }}">
-                {% endif %}
+    <div class="cms-element-{{ element.type }} {{ element.config.style.value }}"
+         style="--products-width: {{ element.config.productsWidth.value ?: "380px" }}">
+        {% if element.config.style.value != "products" %}
+            <div class="hotspot-area">
+                <div class="hotspot-area-image">
+                    {% if element.config.videoActive.value %}
+                        <video class="video" playsinline preload="none" muted autoplay loop>
+                            <source src="{{ element.data.media.media.url }}" type="{{ element.data.media.media.mimeType }}">
+                        </video>
+                    {% else %}
+                        <img src="{{ element.data.media.media.url }}" alt="{{ element.data.media.media.alt }}">
+                    {% endif %}
 
-                <div class="hotspot-area-image-overlay">
-                    {% for product in element.data.products.products %}
-                        {% set price = product.calculatedPrice %}
-                        {% if product.calculatedPrices|length > 0 %}
-                            {% set price = product.calculatedPrices.first() %}
-                        {% endif %}
+                    <div class="hotspot-area-image-overlay">
+                        {% for product in element.data.products.products %}
+                            {% set price = product.calculatedPrice %}
+                            {% if product.calculatedPrices|length > 0 %}
+                                {% set price = product.calculatedPrices.first() %}
+                            {% endif %}
 
-                        {% set positionTop = element.config.productMediaHotspots.value[product.id].top|trim('%')|number_format %}
+                            {% set positionTop = element.config.productMediaHotspots.value[product.id].top|trim('%')|number_format %}
 
-                        {% if element.config.enableDirectUrl.value %}
-                            <a href="{{ seoUrl('frontend.detail.page', {'productId': product.id}) }}"
-                               class="hotspot-area-image-overlay-dot"
-                               data-toggle="tooltip"
-                               data-placement="top"
-                               style="top: {{ element.config.productMediaHotspots.value[product.id].top }}%; left: {{ element.config.productMediaHotspots.value[product.id].left }}%"
-                               title="{{ product.translated.name }}">
-                                {% if element.config.enableAnimatedHotspots.value %}<div class="pulse"></div>{% endif %}
-                            </a>
-                        {% else %}
-                            <div class="hotspot-area-image-overlay-dot"
-                                 tabindex="-1"
-                                 style="top: {{ element.config.productMediaHotspots.value[product.id].top }}%; left: {{ element.config.productMediaHotspots.value[product.id].left }}%">
-                                {% if element.config.enableAnimatedHotspots.value %}<div class="pulse"></div>{% endif %}
-                                <div class="hover-card {% if positionTop > 50 %}hover-card-top{% endif %}">
-                                    {% if product.cover.media.url %}
-                                        {% set attributes = {
-                                            'alt': product.translated.name
-                                        } %}
-                                        {% sw_thumbnails 'product-image-thumbnails' with { media: product.cover.media } %}
-                                    {% else %}
-                                        {% sw_icon 'placeholder' style {'size': 'fluid'} %}
-                                    {% endif %}
-
-                                    <h4>{{ product.translated.name }}</h4>
-
-                                    {% if element.config.enablePrices.value %}
-                                        {% if context.currentCustomerGroup.id != config('MoorlCmsShopTheLook.config.customerGroup') %}
-                                            <p>{{ price.unitPrice|currency }}{{ "general.star"|trans|sw_sanitize }}</p>
+                            {% if element.config.enableDirectUrl.value %}
+                                <a href="{{ seoUrl('frontend.detail.page', {'productId': product.id}) }}"
+                                   class="hotspot-area-image-overlay-dot"
+                                   data-toggle="tooltip"
+                                   data-placement="top"
+                                   style="top: {{ element.config.productMediaHotspots.value[product.id].top }}%; left: {{ element.config.productMediaHotspots.value[product.id].left }}%"
+                                   title="{{ product.translated.name }}">
+                                    {% if element.config.enableAnimatedHotspots.value %}<div class="pulse"></div>{% endif %}
+                                </a>
+                            {% else %}
+                                <div class="hotspot-area-image-overlay-dot"
+                                     tabindex="-1"
+                                     style="top: {{ element.config.productMediaHotspots.value[product.id].top }}%; left: {{ element.config.productMediaHotspots.value[product.id].left }}%">
+                                    {% if element.config.enableAnimatedHotspots.value %}<div class="pulse"></div>{% endif %}
+                                    <div class="hover-card {% if positionTop > 50 %}hover-card-top{% endif %}">
+                                        {% if product.cover.media.url %}
+                                            {% set attributes = {
+                                                'alt': product.translated.name
+                                            } %}
+                                            {% sw_thumbnails 'product-image-thumbnails' with { media: product.cover.media } %}
+                                        {% else %}
+                                            {% sw_icon 'placeholder' style {'size': 'fluid'} %}
                                         {% endif %}
-                                    {% endif %}
 
-                                    <a href="{{ seoUrl('frontend.detail.page', {'productId': product.id}) }}"
-                                       class="btn btn-block btn-primary btn-buy"
-                                       data-modal-class="quickview-modal"
-                                       data-url="{{ path('widgets.quickview.minimal', { 'productId': product.id }) }}"
-                                    >{{ "listing.boxProductDetails"|trans|striptags }}</a>
+                                        <h4>{{ product.translated.name }}</h4>
+
+                                        {% if element.config.enablePrices.value %}
+                                            {% if context.currentCustomerGroup.id != config('MoorlCmsShopTheLook.config.customerGroup') %}
+                                                <p>{{ price.unitPrice|currency }}{{ "general.star"|trans|sw_sanitize }}</p>
+                                            {% endif %}
+                                        {% endif %}
+
+                                        <a href="{{ seoUrl('frontend.detail.page', {'productId': product.id}) }}"
+                                           class="btn btn-block btn-primary btn-buy"
+                                           data-modal-class="quickview-modal"
+                                           data-url="{{ path('widgets.quickview.minimal', { 'productId': product.id }) }}"
+                                        >{{ "listing.boxProductDetails"|trans|striptags }}</a>
+                                    </div>
                                 </div>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
-        </div>
+        {% endif %}
 
-        {% if element.config.enableList.value %}
+        {% if element.config.style.value != "image" %}
             <div class="product-list">
                 {% sw_include '@Storefront/plugin/moorl-foundation/component/product-buy-list/index.html.twig' with {
                     products: element.data.products.products,
