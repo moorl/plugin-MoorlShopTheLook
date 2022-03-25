@@ -11,15 +11,25 @@ use Shopware\Core\Content\Cms\DataResolver\ResolverContext\EntityResolverContext
 use Shopware\Core\Content\Cms\DataResolver\ResolverContext\ResolverContext;
 use Shopware\Core\Content\Cms\SalesChannel\Struct\ImageStruct;
 use Shopware\Core\Content\Cms\SalesChannel\Struct\ProductSliderStruct;
-use Shopware\Core\Content\Media\Cms\ProductSliderCmsElementResolver;
 use Shopware\Core\Content\Media\MediaDefinition;
 use Shopware\Core\Content\Media\MediaEntity;
 use Shopware\Core\Content\Product\ProductCollection;
 use Shopware\Core\Content\Product\ProductDefinition;
+use Shopware\Core\Content\Product\SalesChannel\Detail\ProductConfiguratorLoader;
+use Shopware\Core\Content\Product\SalesChannel\SalesChannelProductEntity;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
+use Shopware\Core\System\SalesChannel\SalesChannelContext;
 
 class MoorlShopTheLookTypeDataResolver extends AbstractCmsElementResolver
 {
+    private ProductConfiguratorLoader $configuratorLoader;
+
+    public function __construct(
+        ProductConfiguratorLoader $configuratorLoader
+    ) {
+        $this->configuratorLoader = $configuratorLoader;
+    }
+
     public function getType(): string
     {
         return 'moorl-shop-the-look';
@@ -44,7 +54,10 @@ class MoorlShopTheLookTypeDataResolver extends AbstractCmsElementResolver
         }
 
         $criteria = new Criteria($products->getValue());
-        $criteria->addAssociation('cover');
+        $criteria->addAssociation('cover.media');
+        $criteria->addAssociation('products.options.group');
+        $criteria->addAssociation('products.properties.group');
+        $criteria->addAssociation('products.mainCategories.category');
         $criteriaCollection->add('products_' . $slot->getUniqueIdentifier(), ProductDefinition::class, $criteria);
 
         return $criteriaCollection;
@@ -72,7 +85,12 @@ class MoorlShopTheLookTypeDataResolver extends AbstractCmsElementResolver
             return;
         }
 
-        $this->enrichFromSearch($slider, $result, 'products_' . $slot->getUniqueIdentifier());
+        $this->enrichFromSearch(
+            $slider,
+            $result,
+            'products_' . $slot->getUniqueIdentifier(),
+            $resolverContext->getSalesChannelContext()
+        );
     }
 
     private function addMediaEntity(CmsSlotEntity $slot, ImageStruct $image, ElementDataCollection $result, FieldConfig $config, ResolverContext $resolverContext): void
@@ -105,7 +123,12 @@ class MoorlShopTheLookTypeDataResolver extends AbstractCmsElementResolver
         }
     }
 
-    private function enrichFromSearch(ProductSliderStruct $slider, ElementDataCollection $result, string $searchKey): void
+    private function enrichFromSearch(
+        ProductSliderStruct $slider,
+        ElementDataCollection $result,
+        string $searchKey,
+        SalesChannelContext $salesChannelContext
+    ): void
     {
         $searchResult = $result->get($searchKey);
         if (!$searchResult) {
@@ -116,6 +139,11 @@ class MoorlShopTheLookTypeDataResolver extends AbstractCmsElementResolver
         $products = $searchResult->getEntities();
         if (!$products) {
             return;
+        }
+
+        /** @var SalesChannelProductEntity $product */
+        foreach ($products as $product) {
+            $product->setSortedProperties($this->configuratorLoader->load($product, $salesChannelContext));
         }
 
         $slider->setProducts($products);
