@@ -24,11 +24,19 @@
         <template slot="content" slot-scope="{ active }">
             <sw-container v-if="active === 'general'">
                 <sw-container columns="1fr 1fr" gap="0 10px">
-                    <sw-field v-model="element.config.enableList.value"
-                              bordered
-                              type="switch"
-                              :label="$tc(snippetPrefix + 'label.enableList')">
-                    </sw-field>
+                    <sw-select-field
+                            :label="$tc('moorl-cms.elements.general.config.label.style')"
+                            v-model="element.config.style.value">
+                        <option value="image-products">{{ $tc(snippetPrefix + 'label.imageProducts') }}</option>
+                        <option value="products-image">{{ $tc(snippetPrefix + 'label.productsImage') }}</option>
+                        <option value="products">{{ $tc(snippetPrefix + 'label.products') }}</option>
+                        <option value="image">{{ $tc(snippetPrefix + 'label.image') }}</option>
+                    </sw-select-field>
+
+                    <sw-text-field
+                            :label="$tc(snippetPrefix + 'label.productsWidth')"
+                            v-model="element.config.productsWidth.value">
+                    </sw-text-field>
 
                     <sw-field v-model="element.config.enablePrices.value"
                               bordered

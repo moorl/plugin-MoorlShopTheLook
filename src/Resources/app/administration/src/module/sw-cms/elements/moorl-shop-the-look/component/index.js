@@ -35,7 +35,13 @@ Component.register('sw-cms-el-moorl-shop-the-look', {
                 }
             }
             return price;
-        }
+        },
+
+        itemCss() {
+            return {
+                '--products-width': this.element.config.productsWidth.value
+            }
+        },
     },
 
     watch: {

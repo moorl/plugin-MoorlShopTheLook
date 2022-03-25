@@ -58,7 +58,11 @@ Application.getContainer('service').cmsService.registerCmsElement({
         },
         style: {
             source: 'static',
-            value: 'standard'
+            value: 'image-products'
+        },
+        productsWidth: {
+            source: 'static',
+            value: '380px'
         },
         enableList: {
             source: 'static',
