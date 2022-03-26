@@ -19,20 +19,17 @@
     height: 100%;
 
     .product-list-content-item {
-      margin-bottom: 10px;
-      display: flex;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: auto 120px 1fr;
       align-items: center;
+      grid-gap: 8px;
+      border-bottom: 1px solid #888888;
 
       img {
-        width: 25%;
-        height: auto;
-        display: block;
+        width: 100%;
       }
 
       .product-list-content-item-info {
-        width: 50%;
-
         h4 {
           margin-bottom: 10px;
         }

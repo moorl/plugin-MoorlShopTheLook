@@ -19,7 +19,7 @@
                          v-for="product in element.data.products"
                          :style="pointerPositionCss(product.id)"
                          class="hotspot-area-image-overlay-dot"
-                         v-tooltip="{message: product.name, position: 'top'}">
+                         v-tooltip="{message: product.translated.name, position: 'top'}">
                     </div>
                 </template>
             </div>
@@ -32,22 +32,27 @@
                 <div v-if="element.config.productMediaHotspots.value[product.id]"
                      v-for="product in element.data.products"
                      class="product-list-content-item">
+                    <div>
+                        <i class="fas fa-check"></i>
+                    </div>
                     <img v-if="product.cover && product.cover.media"
                          :src="product.cover.media.url"
                          :alt="product.name">
                     <div class="product-list-content-item-info">
                         <h4>{{ product.translated.name }}</h4>
+
+                        <div>
+                            <sw-product-variant-info :variations="product.variation"></sw-product-variant-info>
+                        </div>
+
                         <div v-if="product.price" class="product-list-content-item-info-price">
                            {{ product.price[0].gross | numberFormat }}
                         </div>
                     </div>
-                    <div>
-                        <i class="fas fa-check"></i>
-                    </div>
                 </div>
             </template>
         </div>
-        <hr>
+
         <div class="product-list-buy">
             <div class="product-list-buy-price">
                 <div>Total:</div>

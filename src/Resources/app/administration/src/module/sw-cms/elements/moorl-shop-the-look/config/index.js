@@ -1,5 +1,5 @@
-const { Component, Mixin } = Shopware;
-const { Criteria, EntityCollection } = Shopware.Data;
+const {Component, Mixin} = Shopware;
+const {Criteria, EntityCollection} = Shopware.Data;
 
 import template from './index.html.twig';
 import './index.scss';
@@ -35,14 +35,15 @@ Component.register('sw-cms-el-config-moorl-shop-the-look', {
             return null;
         },
 
-        productMediaFilter() {
+        productSearchCriteria() {
             const criteria = new Criteria(1, 25);
+            criteria.addAssociation('options.group');
             criteria.addAssociation('cover');
 
             return criteria;
         },
 
-        productMultiSelectContext() {
+        productSearchContext() {
             const context = Object.assign({}, Shopware.Context.api);
             context.inheritance = true;
 
@@ -96,11 +97,12 @@ Component.register('sw-cms-el-config-moorl-shop-the-look', {
             this.productCollection = new EntityCollection('/product', 'product', Shopware.Context.api);
 
             if (this.element.config.products.value.length > 0) {
-                const criteria = new Criteria(1, 100);
+                const criteria = new Criteria(1, 25);
+                criteria.addAssociation('options.group');
                 criteria.addAssociation('cover');
                 criteria.setIds(this.element.config.products.value);
 
-                this.productRepository.search(criteria, Object.assign({}, Shopware.Context.api, { inheritance: true }))
+                this.productRepository.search(criteria, this.productSearchContext)
                     .then(result => {
                         this.productCollection = result;
                         this.onProductsChange();
@@ -113,7 +115,7 @@ Component.register('sw-cms-el-config-moorl-shop-the-look', {
 
             this.element.config.products.value = this.productCollection.getIds();
 
-            this.element.config.products.value.forEach(function(id) {
+            this.element.config.products.value.forEach(function (id) {
                 if (!_that.element.config.productMediaHotspots.value[id]) {
                     _that.element.config.productMediaHotspots.value[id] = {
                         top: 50,
@@ -139,7 +141,7 @@ Component.register('sw-cms-el-config-moorl-shop-the-look', {
             }
         },
 
-        async onImageUpload({ targetId }) {
+        async onImageUpload({targetId}) {
             const mediaEntity = await this.mediaRepository.get(targetId, Shopware.Context.api);
 
             this.element.config.media.value = mediaEntity.id;
