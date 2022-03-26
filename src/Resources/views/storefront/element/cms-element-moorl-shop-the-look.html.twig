@@ -1,6 +1,13 @@
 {% block element_moorl_shop_the_look %}
     {% set priceTotal = 0 %}
 
+    {% set enablePrices = element.config.enablePrices.value %}
+    {% set enableAddToCart = element.config.enableAddToCart.value %}
+    {% if context.currentCustomerGroup.id == config('MoorlCmsShopTheLook.config.customerGroup') %}
+        {% set enablePrices = false %}
+        {% set enableAddToCart = false %}
+    {% endif %}
+
     <div class="cms-element-{{ element.type }} {{ element.config.style.value }}"
          style="--products-width: {{ element.config.productsWidth.value ?: "380px" }}">
         {% if element.config.style.value != "products" %}
@@ -49,10 +56,8 @@
 
                                         <h4>{{ product.translated.name }}</h4>
 
-                                        {% if element.config.enablePrices.value %}
-                                            {% if context.currentCustomerGroup.id != config('MoorlCmsShopTheLook.config.customerGroup') %}
-                                                <p>{{ price.unitPrice|currency }}{{ "general.star"|trans|sw_sanitize }}</p>
-                                            {% endif %}
+                                        {% if enablePrices %}
+                                            <p>{{ price.unitPrice|currency }}{{ "general.star"|trans|sw_sanitize }}</p>
                                         {% endif %}
 
                                         <a href="{{ seoUrl('frontend.detail.page', {'productId': product.id}) }}"
@@ -72,9 +77,7 @@
         {% if element.config.style.value != "image" %}
             <div class="product-list">
                 {% sw_include '@Storefront/plugin/moorl-foundation/component/product-buy-list/index.html.twig' with {
-                    products: element.data.products.products,
-                    enablePrices: element.config.enablePrices.value,
-                    enableAddToCart: element.config.enableAddToCart.value,
+                    products: element.data.products.products
                 } %}
             </div>
         {% endif %}
