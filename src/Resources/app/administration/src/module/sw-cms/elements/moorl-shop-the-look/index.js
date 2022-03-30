@@ -77,6 +77,18 @@ Application.getContainer('service').cmsService.registerCmsElement({
             source: 'static',
             value: true
         },
+        enableVariantSwitch: {
+            source: 'static',
+            value: true
+        },
+        enableAddToCartAll: {
+            source: 'static',
+            value: true
+        },
+        enableAddToCartSingle: {
+            source: 'static',
+            value: true
+        },
         enableDirectUrl: {
             source: 'static',
             value: false

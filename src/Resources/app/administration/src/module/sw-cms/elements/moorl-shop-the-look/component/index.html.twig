@@ -27,37 +27,7 @@
     </div>
 
     <div class="product-list">
-        <div class="product-list-content">
-            <template v-if="element.data.products">
-                <div v-if="element.config.productMediaHotspots.value[product.id]"
-                     v-for="product in element.data.products"
-                     class="product-list-content-item">
-                    <div>
-                        <i class="fas fa-check"></i>
-                    </div>
-                    <img v-if="product.cover && product.cover.media"
-                         :src="product.cover.media.url"
-                         :alt="product.name">
-                    <div class="product-list-content-item-info">
-                        <h4>{{ product.translated.name }}</h4>
-
-                        <div>
-                            <sw-product-variant-info :variations="product.variation"></sw-product-variant-info>
-                        </div>
-
-                        <div v-if="product.price" class="product-list-content-item-info-price">
-                           {{ product.price[0].gross | numberFormat }}
-                        </div>
-                    </div>
-                </div>
-            </template>
-        </div>
-
-        <div class="product-list-buy">
-            <div class="product-list-buy-price">
-                <div>Total:</div>
-                <div class="product-list-buy-price-total">{{ priceTotal | numberFormat }}</div>
-            </div>
-        </div>
+        <sw-cms-el-moorl-product-buy-list v-bind="{ element }">
+        </sw-cms-el-moorl-product-buy-list>
     </div>
 </div>
