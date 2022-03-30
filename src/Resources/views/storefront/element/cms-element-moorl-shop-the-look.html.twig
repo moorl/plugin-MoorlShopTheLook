@@ -1,13 +1,10 @@
 {% block element_moorl_shop_the_look %}
-    {% set priceTotal = 0 %}
-
     {% set enablePrices = element.config.enablePrices.value %}
-    {% set enableAddToCart = element.config.enableAddToCart.value %}
-    {% set enableAddToCartSingle = element.config.enableAddToCart.value %}
-    {% set enableAddToCartAll = element.config.enableAddToCart.value %}
+    {% set enableAddToCartSingle = element.config.enableAddToCartSingle.value %}
+    {% set enableAddToCartAll = element.config.enableAddToCartAll.value %}
+
     {% if context.currentCustomerGroup.id == config('MoorlCmsShopTheLook.config.customerGroup') %}
         {% set enablePrices = false %}
-        {% set enableAddToCart = false %}
         {% set enableAddToCartSingle = false %}
         {% set enableAddToCartAll = false %}
     {% endif %}

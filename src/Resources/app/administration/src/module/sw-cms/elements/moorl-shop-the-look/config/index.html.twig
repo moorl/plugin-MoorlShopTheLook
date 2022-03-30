@@ -38,24 +38,6 @@
                             v-model="element.config.productsWidth.value">
                     </sw-text-field>
 
-                    <sw-field v-model="element.config.enablePrices.value"
-                              bordered
-                              type="switch"
-                              :label="$tc(snippetPrefix + 'label.enablePrices')">
-                    </sw-field>
-
-                    <sw-field v-model="element.config.enableAddToCart.value"
-                              bordered
-                              type="switch"
-                              :label="$tc(snippetPrefix + 'label.enableAddToCart')">
-                    </sw-field>
-
-                    <sw-field v-model="element.config.enableDirectUrl.value"
-                              bordered
-                              type="switch"
-                              :label="$tc(snippetPrefix + 'label.enableDirectUrl')">
-                    </sw-field>
-
                     <sw-field v-model="element.config.enableAnimatedHotspots.value"
                               bordered
                               type="switch"
@@ -85,26 +67,10 @@
                         @media-upload-finish="onImageUpload">
                 </sw-upload-listener>
 
-                <sw-entity-multi-select
-                        class="sw-cms-el-config-product-slider__products"
-                        :label="$tc('sw-cms.elements.productSlider.config.label.selection')"
-                        :placeholder="$tc('sw-cms.elements.productSlider.config.placeholder.selection')"
-                        v-model="productCollection"
-                        @change="onProductsChange"
-                        :context="productSearchContext"
-                        :criteria="productSearchCriteria">
-                    <template #result-item="{ item, index }">
-                        <slot name="result-item" v-bind="{ item, index }">
-                            <li is="sw-select-result" v-bind="{ item, index }">
-                                <span class="sw-select-result__result-item-text">
-                                    <sw-product-variant-info :variations="item.variation">
-                                        {{ item.translated.name || item.name }}
-                                    </sw-product-variant-info>
-                                </span>
-                            </li>
-                        </slot>
-                    </template>
-                </sw-entity-multi-select>
+                <sw-cms-el-config-moorl-product-buy-list
+                        v-bind="{ element }"
+                        @products-change="onProductsChange"
+                />
             </sw-container>
 
             <sw-container v-if="products && active === 'hotspots'">
@@ -184,8 +150,6 @@
                 </sw-container>
             </sw-container>
         </template>
-
-
     </sw-tabs>
 
     <sw-media-modal-v2

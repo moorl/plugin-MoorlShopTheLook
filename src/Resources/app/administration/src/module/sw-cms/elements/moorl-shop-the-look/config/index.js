@@ -15,7 +15,6 @@ Component.register('sw-cms-el-config-moorl-shop-the-look', {
 
     data() {
         return {
-            productCollection: null,
             mediaModalIsOpen: false,
             initialFolderId: null,
             snippetPrefix: 'sw-cms.elements.moorl-shop-the-look.',
@@ -23,31 +22,12 @@ Component.register('sw-cms-el-config-moorl-shop-the-look', {
     },
 
     computed: {
-        productRepository() {
-            return this.repositoryFactory.create('product');
-        },
-
         products() {
             if (this.element.data && this.element.data.products && this.element.data.products.length > 0) {
                 return this.element.data.products;
             }
 
             return null;
-        },
-
-        productSearchCriteria() {
-            const criteria = new Criteria(1, 25);
-            criteria.addAssociation('options.group');
-            criteria.addAssociation('cover');
-
-            return criteria;
-        },
-
-        productSearchContext() {
-            const context = Object.assign({}, Shopware.Context.api);
-            context.inheritance = true;
-
-            return context;
         },
 
         mediaRepository() {
@@ -93,27 +73,10 @@ Component.register('sw-cms-el-config-moorl-shop-the-look', {
                     this.element.data.media = result;
                 });
             }
-
-            this.productCollection = new EntityCollection('/product', 'product', Shopware.Context.api);
-
-            if (this.element.config.products.value.length > 0) {
-                const criteria = new Criteria(1, 25);
-                criteria.addAssociation('options.group');
-                criteria.addAssociation('cover');
-                criteria.setIds(this.element.config.products.value);
-
-                this.productRepository.search(criteria, this.productSearchContext)
-                    .then(result => {
-                        this.productCollection = result;
-                        this.onProductsChange();
-                    });
-            }
         },
 
         onProductsChange() {
             const _that = this;
-
-            this.element.config.products.value = this.productCollection.getIds();
 
             this.element.config.products.value.forEach(function (id) {
                 if (!_that.element.config.productMediaHotspots.value[id]) {
@@ -126,8 +89,6 @@ Component.register('sw-cms-el-config-moorl-shop-the-look', {
                 _that.element.config.productMediaHotspots.value[id].top = parseInt(_that.element.config.productMediaHotspots.value[id].top);
                 _that.element.config.productMediaHotspots.value[id].left = parseInt(_that.element.config.productMediaHotspots.value[id].left);
             });
-
-            this.$set(this.element.data, 'products', this.productCollection);
         },
 
         pointerPositionCss(id) {
