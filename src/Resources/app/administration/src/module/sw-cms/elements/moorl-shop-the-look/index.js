@@ -1,7 +1,6 @@
 const Application = Shopware.Application;
 import './component';
 import './config';
-import './preview';
 
 const Criteria = Shopware.Data.Criteria;
 const criteria = new Criteria();
@@ -9,11 +8,14 @@ criteria.addAssociation('options.group');
 criteria.addAssociation('cover');
 
 Application.getContainer('service').cmsService.registerCmsElement({
+    plugin: 'MoorlCmsShopTheLook',
+    icon: 'default-shopping-cart',
+    color: '#eebecd',
+    previewComponent: true,
     name: 'moorl-shop-the-look',
     label: 'sw-cms.elements.moorl-shop-the-look.title',
     component: 'sw-cms-el-moorl-shop-the-look',
     configComponent: 'sw-cms-el-config-moorl-shop-the-look',
-    previewComponent: 'sw-cms-el-preview-moorl-shop-the-look',
     defaultConfig: {
         products: {
             source: 'static',
@@ -96,6 +98,10 @@ Application.getContainer('service').cmsService.registerCmsElement({
         enableAnimatedHotspots: {
             source: 'static',
             value: true
+        },
+        emptyText: {
+            source: 'static',
+            value: 'No products available'
         }
     },
     collect: function collect(elem) {
