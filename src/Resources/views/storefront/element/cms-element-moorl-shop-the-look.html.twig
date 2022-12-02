@@ -2,6 +2,7 @@
     {% set enablePrices = element.config.enablePrices.value %}
     {% set enableAddToCartSingle = element.config.enableAddToCartSingle.value %}
     {% set enableAddToCartAll = element.config.enableAddToCartAll.value %}
+    {% set hoverCardHideButton = element.config.hoverCardHideButton.value %}
 
     {% if context.currentCustomerGroup.id == config('MoorlCmsShopTheLook.config.customerGroup') %}
         {% set enablePrices = false %}
@@ -66,11 +67,13 @@
                                                     <p>{{ price.unitPrice|currency }}{{ "general.star"|trans|sw_sanitize }}</p>
                                                 {% endif %}
 
-                                                <a href="{{ seoUrl('frontend.detail.page', {'productId': product.id}) }}"
-                                                   class="btn btn-block btn-primary btn-buy"
-                                                   data-modal-class="quickview-modal"
-                                                   data-url="{{ path('widgets.quickview.minimal', { 'productId': product.id }) }}"
-                                                >{{ "listing.boxProductDetails"|trans|striptags }}</a>
+                                                {% if not hoverCardHideButton %}
+                                                    <a href="{{ seoUrl('frontend.detail.page', {'productId': product.id}) }}"
+                                                       class="btn btn-block btn-primary btn-buy"
+                                                       data-modal-class="quickview-modal"
+                                                       data-url="{{ path('widgets.quickview.minimal', { 'productId': product.id }) }}"
+                                                    >{{ "listing.boxProductDetails"|trans|striptags }}</a>
+                                                {% endif %}
                                             </div>
                                         </div>
                                     {% endif %}

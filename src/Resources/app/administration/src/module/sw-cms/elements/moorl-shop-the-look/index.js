@@ -55,6 +55,10 @@ Application.getContainer('service').cmsService.registerCmsElement({
             source: 'static',
             value: ""
         },
+        hoverCardHideButton: {
+            source: 'static',
+            value: false
+        },
         productMediaHotspots: {
             source: 'static',
             value: {}

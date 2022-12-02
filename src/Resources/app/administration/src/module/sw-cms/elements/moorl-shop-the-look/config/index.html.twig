@@ -151,6 +151,12 @@
                             <sw-field v-model="element.config.custom4.value"
                                       :label="$tc(snippetPrefix + 'label.custom4')">
                             </sw-field>
+
+                            <sw-field v-model="element.config.hoverCardHideButton.value"
+                                      bordered
+                                      type="switch"
+                                      :label="$tc(snippetPrefix + 'label.hoverCardHideButton')">
+                            </sw-field>
                         </sw-container>
                     </sw-container>
                 {% endblock %}

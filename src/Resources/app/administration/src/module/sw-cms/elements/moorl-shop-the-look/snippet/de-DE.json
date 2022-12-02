@@ -4,6 +4,7 @@
             "moorl-shop-the-look": {
                 "title": "Shop-The-Look",
                 "label": {
+                    "hoverCardHideButton": "Button in Hovercard ausblenden",
                     "videoActive": "Video aktiv",
                     "positionDescription": "NUtzen `0` bis `100` für die Positionierung deiner Hotspots (Oben, Links)",
                     "enablePrices": "Preise anzeigen",
