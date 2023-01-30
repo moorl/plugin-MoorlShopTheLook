@@ -3,6 +3,7 @@
     {% set enableAddToCartSingle = element.config.enableAddToCartSingle.value %}
     {% set enableAddToCartAll = element.config.enableAddToCartAll.value %}
     {% set hoverCardHideButton = element.config.hoverCardHideButton.value %}
+    {% set enableDirectUrl = element.config.enableDirectUrl.value %}
 
     {% if context.currentCustomerGroup.id == config('MoorlCmsShopTheLook.config.customerGroup') %}
         {% set enablePrices = false %}
