@@ -39,7 +39,7 @@
                                     {% if element.config.enableDirectUrl.value %}
                                         <a href="{{ seoUrl('frontend.detail.page', {'productId': product.id}) }}"
                                            class="hotspot-area-image-overlay-dot"
-                                           data-toggle="tooltip"
+                                           data-bs-toggle="tooltip"
                                            data-placement="top"
                                            style="top: {{ element.config.productMediaHotspots.value[product.id].top }}%; left: {{ element.config.productMediaHotspots.value[product.id].left }}%"
                                            title="{{ product.translated.name }}">
