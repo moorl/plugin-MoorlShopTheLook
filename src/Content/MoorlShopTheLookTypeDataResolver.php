@@ -22,12 +22,8 @@ use Shopware\Core\System\SalesChannel\SalesChannelContext;
 
 class MoorlShopTheLookTypeDataResolver extends AbstractCmsElementResolver
 {
-    private ProductConfiguratorLoader $configuratorLoader;
-
-    public function __construct(
-        ProductConfiguratorLoader $configuratorLoader
-    ) {
-        $this->configuratorLoader = $configuratorLoader;
+    public function __construct(private readonly ProductConfiguratorLoader $configuratorLoader)
+    {
     }
 
     public function getType(): string
