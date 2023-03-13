@@ -69,11 +69,13 @@
                                                 {% endif %}
 
                                                 {% if not hoverCardHideButton %}
-                                                    <a href="{{ seoUrl('frontend.detail.page', {'productId': product.id}) }}"
-                                                       class="btn btn-block btn-primary btn-buy"
-                                                       data-modal-class="quickview-modal"
-                                                       data-url="{{ path('widgets.quickview.minimal', { 'productId': product.id }) }}"
-                                                    >{{ "listing.boxProductDetails"|trans|striptags }}</a>
+                                                    <div class="d-grid">
+                                                        <a href="{{ seoUrl('frontend.detail.page', {'productId': product.id}) }}"
+                                                           class="btn btn-primary btn-buy"
+                                                           data-modal-class="quickview-modal"
+                                                           data-url="{{ path('widgets.quickview.minimal', { 'productId': product.id }) }}"
+                                                        >{{ "listing.boxProductDetails"|trans|striptags }}</a>
+                                                    </div>
                                                 {% endif %}
                                             </div>
                                         </div>
