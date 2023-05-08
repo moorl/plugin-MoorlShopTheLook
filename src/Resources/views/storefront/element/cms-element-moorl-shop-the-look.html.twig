@@ -91,7 +91,7 @@
         {% if element.config.style.value != "image" %}
             {% block element_moorl_shop_the_look_product_list %}
                 <div class="product-list">
-                    {% sw_include '@Storefront/plugin/moorl-foundation/component/product-buy-list/index.html.twig' with {
+                    {% sw_include '@MoorlFoundation/plugin/moorl-foundation/component/product-buy-list/index.html.twig' with {
                         products: element.data.products.products
                     } %}
                 </div>
