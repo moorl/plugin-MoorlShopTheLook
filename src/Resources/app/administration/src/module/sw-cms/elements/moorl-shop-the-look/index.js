@@ -26,6 +26,10 @@ Application.getContainer('service').cmsService.registerCmsElement({
                 criteria: criteria
             }
         },
+        productQuantities: {
+            source: 'static',
+            value: {}
+        },
         media: {
             source: 'static',
             value: null,
