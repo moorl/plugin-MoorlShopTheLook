@@ -100,10 +100,7 @@
                                     <img v-else :src="mediaUrl">
 
                                     <div class="hotspot-area-image-overlay" ref="hotspotArea">
-                                        <template
-                                                v-if="element.data.products"
-                                                v-for="product in element.data.products"
-                                        >
+                                        <template v-for="product in products">
                                             <div
                                                     v-if="element.config.productMediaHotspots.value[product.id]"
                                                     :style="pointerPositionCss(product.id)"
@@ -117,29 +114,29 @@
 
                             <div class="product-list">
                                 <div class="product-list-content">
-                                    <div v-if="element.config.productMediaHotspots.value[product.id]"
-                                         v-for="product in products"
-                                         class="product-list-content-item">
-                                        <div style="grid-area: a;">{{ product.translated.name }}</div>
+                                    <template v-for="product in products">
+                                        <div v-if="element.config.productMediaHotspots.value[product.id]" class="product-list-content-item">
+                                            <div style="grid-area: a;">{{ product.translated.name }}</div>
 
-                                        <sw-number-field
-                                                style="grid-area: b;"
-                                                min="0"
-                                                max="100"
-                                                step="1"
-                                                :placeholder="$tc(snippetPrefix + 'label.topPosition')"
-                                                v-model:value="element.config.productMediaHotspots.value[product.id].top"
-                                        />
+                                            <sw-number-field
+                                                    style="grid-area: b;"
+                                                    min="0"
+                                                    max="100"
+                                                    step="1"
+                                                    :placeholder="$tc(snippetPrefix + 'label.topPosition')"
+                                                    v-model:value="element.config.productMediaHotspots.value[product.id].top"
+                                            />
 
-                                        <sw-number-field
-                                                style="grid-area: c;"
-                                                min="0"
-                                                max="100"
-                                                step="1"
-                                                :placeholder="$tc(snippetPrefix + 'label.leftPosition')"
-                                                v-model:value="element.config.productMediaHotspots.value[product.id].left"
-                                        />
-                                    </div>
+                                            <sw-number-field
+                                                    style="grid-area: c;"
+                                                    min="0"
+                                                    max="100"
+                                                    step="1"
+                                                    :placeholder="$tc(snippetPrefix + 'label.leftPosition')"
+                                                    v-model:value="element.config.productMediaHotspots.value[product.id].left"
+                                            />
+                                        </div>
+                                    </template>
                                 </div>
                             </div>
                         </div>
