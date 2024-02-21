@@ -3,22 +3,28 @@
         <sw-tabs default-item="general">
             <template #default="{ active }">
                 {% block sw_cms_config_moorl_shop_the_look_tabs %}
-                    <sw-tabs-item :title="$tc(snippetPrefix + 'tab.general')"
-                                  name="general"
-                                  :activeTab="active">
+                    <sw-tabs-item
+                            :title="$tc(snippetPrefix + 'tab.general')"
+                            name="general"
+                            :activeTab="active"
+                    >
                         {{ $tc(snippetPrefix + 'tab.general') }}
                     </sw-tabs-item>
 
-                    <sw-tabs-item v-if="products"
-                                  :title="$tc(snippetPrefix + 'tab.hotspots')"
-                                  name="hotspots"
-                                  :activeTab="active">
+                    <sw-tabs-item
+                            v-if="products"
+                            :title="$tc(snippetPrefix + 'tab.hotspots')"
+                            name="hotspots"
+                            :activeTab="active"
+                    >
                         {{ $tc(snippetPrefix + 'tab.hotspots') }}
                     </sw-tabs-item>
 
-                    <sw-tabs-item :title="$tc(snippetPrefix + 'tab.other')"
-                                  name="other"
-                                  :activeTab="active">
+                    <sw-tabs-item
+                            :title="$tc(snippetPrefix + 'tab.other')"
+                            name="other"
+                            :activeTab="active"
+                    >
                         {{ $tc(snippetPrefix + 'tab.other') }}
                     </sw-tabs-item>
                 {% endblock %}
@@ -30,7 +36,8 @@
                         <sw-container columns="1fr 1fr" gap="0 10px">
                             <sw-select-field
                                     :label="$tc('moorl-cms.elements.general.config.label.style')"
-                                    v-model:value="element.config.style.value">
+                                    v-model:value="element.config.style.value"
+                            >
                                 <option value="image-products">{{ $tc(snippetPrefix + 'label.imageProducts') }}</option>
                                 <option value="products-image">{{ $tc(snippetPrefix + 'label.productsImage') }}</option>
                                 <option value="products">{{ $tc(snippetPrefix + 'label.products') }}</option>
@@ -93,13 +100,16 @@
                                     <img v-else :src="mediaUrl">
 
                                     <div class="hotspot-area-image-overlay" ref="hotspotArea">
-                                        <template v-if="element.data.products">
-                                            <div v-if="element.config.productMediaHotspots.value[product.id]"
-                                                 v-for="product in element.data.products"
-                                                 :style="pointerPositionCss(product.id)"
-                                                 class="hotspot-area-image-overlay-dot"
-                                                 v-tooltip="{message: product.name, position: 'top'}">
-                                            </div>
+                                        <template
+                                                v-if="element.data.products"
+                                                v-for="product in element.data.products"
+                                        >
+                                            <div
+                                                    v-if="element.config.productMediaHotspots.value[product.id]"
+                                                    :style="pointerPositionCss(product.id)"
+                                                    class="hotspot-area-image-overlay-dot"
+                                                    v-tooltip="{message: product.name, position: 'top'}"
+                                            ></div>
                                         </template>
                                     </div>
                                 </div>
