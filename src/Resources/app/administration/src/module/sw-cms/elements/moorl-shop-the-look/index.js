@@ -9,7 +9,7 @@ criteria.addAssociation('cover');
 
 Application.getContainer('service').cmsService.registerCmsElement({
     plugin: 'MoorlCmsShopTheLook',
-    icon: 'default-shopping-cart',
+    icon: 'regular-shopping-cart',
     color: '#eebecd',
     previewComponent: true,
     name: 'moorl-shop-the-look',
