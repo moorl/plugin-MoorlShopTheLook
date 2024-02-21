@@ -1,7 +1,7 @@
 {% block sw_cms_config_moorl_shop_the_look %}
     <div class="sw-cms-el-config-moorl-shop-the-look">
         <sw-tabs default-item="general">
-            <template #default="{ active }" >
+            <template #default="{ active }">
                 {% block sw_cms_config_moorl_shop_the_look_tabs %}
                     <sw-tabs-item :title="$tc(snippetPrefix + 'tab.general')"
                                   name="general"
@@ -39,35 +39,38 @@
 
                             <sw-text-field
                                     :label="$tc(snippetPrefix + 'label.productsWidth')"
-                                    v-model:value="element.config.productsWidth.value">
-                            </sw-text-field>
+                                    v-model:value="element.config.productsWidth.value"
+                            />
 
-                            <sw-switch-field v-model:value="element.config.enableAnimatedHotspots.value"
-                                      bordered
-                                      :label="$tc(snippetPrefix + 'label.enableAnimatedHotspots')">
-                            </sw-switch-field>
+                            <sw-switch-field
+                                    v-model:value="element.config.enableAnimatedHotspots.value"
+                                    bordered
+                                    :label="$tc(snippetPrefix + 'label.enableAnimatedHotspots')"
+                            />
 
-                            <sw-switch-field v-model:value="element.config.videoActive.value"
-                                      bordered
-                                      :label="$tc(snippetPrefix + 'label.videoActive')">
-                            </sw-switch-field>
+                            <sw-switch-field
+                                    v-model:value="element.config.videoActive.value"
+                                    bordered
+                                    :label="$tc(snippetPrefix + 'label.videoActive')"
+                            />
                         </sw-container>
 
-                        <sw-media-upload-v2 variant="regular"
-                                            :uploadTag="uploadTag"
-                                            :source="previewSource"
-                                            :allowMultiSelect="false"
-                                            :defaultFolder="cmsPageState.pageEntityName"
-                                            :caption="$tc('sw-cms.elements.general.config.caption.mediaUpload')"
-                                            @media-upload-sidebar-open="onOpenMediaModal"
-                                            @media-upload-remove-image="onImageRemove">
-                        </sw-media-upload-v2>
+                        <sw-media-upload-v2
+                                variant="regular"
+                                :uploadTag="uploadTag"
+                                :source="previewSource"
+                                :allowMultiSelect="false"
+                                :defaultFolder="cmsPageState.pageEntityName"
+                                :caption="$tc('sw-cms.elements.general.config.caption.mediaUpload')"
+                                @media-upload-sidebar-open="onOpenMediaModal"
+                                @media-upload-remove-image="onImageRemove"
+                        />
 
                         <sw-upload-listener
                                 :uploadTag="uploadTag"
                                 autoUpload
-                                @media-upload-finish="onImageUpload">
-                        </sw-upload-listener>
+                                @media-upload-finish="onImageUpload"
+                        />
 
                         <sw-cms-el-config-moorl-product-buy-list
                                 v-bind="{ element }"
@@ -109,21 +112,23 @@
                                          class="product-list-content-item">
                                         <div style="grid-area: a;">{{ product.translated.name }}</div>
 
-                                        <sw-number-field style="grid-area: b;"
-                                                  min="0"
-                                                  max="100"
-                                                  step="1"
-                                                  :placeholder="$tc(snippetPrefix + 'label.topPosition')"
-                                                  v-model:value="element.config.productMediaHotspots.value[product.id].top">
-                                        </sw-number-field>
+                                        <sw-number-field
+                                                style="grid-area: b;"
+                                                min="0"
+                                                max="100"
+                                                step="1"
+                                                :placeholder="$tc(snippetPrefix + 'label.topPosition')"
+                                                v-model:value="element.config.productMediaHotspots.value[product.id].top"
+                                        />
 
-                                        <sw-number-field style="grid-area: c;"
-                                                  min="0"
-                                                  max="100"
-                                                  step="1"
-                                                  :placeholder="$tc(snippetPrefix + 'label.leftPosition')"
-                                                  v-model:value="element.config.productMediaHotspots.value[product.id].left">
-                                        </sw-number-field>
+                                        <sw-number-field
+                                                style="grid-area: c;"
+                                                min="0"
+                                                max="100"
+                                                step="1"
+                                                :placeholder="$tc(snippetPrefix + 'label.leftPosition')"
+                                                v-model:value="element.config.productMediaHotspots.value[product.id].left"
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -132,26 +137,31 @@
 
                     <sw-container v-if="active === 'other'">
                         <sw-container columns="1fr 1fr" gap="0 10px">
-                            <sw-text-field v-model:value="element.config.custom1.value"
-                                      :label="$tc(snippetPrefix + 'label.custom1')">
-                            </sw-text-field>
+                            <sw-text-field
+                                    v-model:value="element.config.custom1.value"
+                                    :label="$tc(snippetPrefix + 'label.custom1')"
+                            />
 
-                            <sw-text-field v-model:value="element.config.custom2.value"
-                                      :label="$tc(snippetPrefix + 'label.custom2')">
-                            </sw-text-field>
+                            <sw-text-field
+                                    v-model:value="element.config.custom2.value"
+                                    :label="$tc(snippetPrefix + 'label.custom2')"
+                            />
 
-                            <sw-text-field v-model:value="element.config.custom3.value"
-                                      :label="$tc(snippetPrefix + 'label.custom3')">
-                            </sw-text-field>
+                            <sw-text-field
+                                    v-model:value="element.config.custom3.value"
+                                    :label="$tc(snippetPrefix + 'label.custom3')"
+                            />
 
-                            <sw-text-field v-model:value="element.config.custom4.value"
-                                      :label="$tc(snippetPrefix + 'label.custom4')">
-                            </sw-text-field>
+                            <sw-text-field
+                                    v-model:value="element.config.custom4.value"
+                                    :label="$tc(snippetPrefix + 'label.custom4')"
+                            />
 
-                            <sw-switch-field v-model:value="element.config.hoverCardHideButton.value"
-                                      bordered
-                                      :label="$tc(snippetPrefix + 'label.hoverCardHideButton')">
-                            </sw-switch-field>
+                            <sw-switch-field
+                                    v-model:value="element.config.hoverCardHideButton.value"
+                                    bordered
+                                    :label="$tc(snippetPrefix + 'label.hoverCardHideButton')"
+                            />
                         </sw-container>
                     </sw-container>
                 {% endblock %}
@@ -159,15 +169,15 @@
         </sw-tabs>
 
         <sw-media-modal-v2
-            variant="regular"
-            v-if="mediaModalIsOpen"
-            :caption="$tc('sw-cms.elements.general.config.caption.mediaUpload')"
-            :entityContext="cmsPageState.entityName"
-            :allowMultiSelect="false"
-            :initialFolderId="cmsPageState.defaultMediaFolderId"
-            @media-upload-remove-image="onImageRemove"
-            @media-modal-selection-change="onSelectionChanges"
-            @modal-close="onCloseModal">
-        </sw-media-modal-v2>
+                variant="regular"
+                v-if="mediaModalIsOpen"
+                :caption="$tc('sw-cms.elements.general.config.caption.mediaUpload')"
+                :entityContext="cmsPageState.entityName"
+                :allowMultiSelect="false"
+                :initialFolderId="cmsPageState.defaultMediaFolderId"
+                @media-upload-remove-image="onImageRemove"
+                @media-modal-selection-change="onSelectionChanges"
+                @modal-close="onCloseModal"
+        />
     </div>
 {% endblock %}
