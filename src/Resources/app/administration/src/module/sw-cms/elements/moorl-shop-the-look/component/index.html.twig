@@ -14,19 +14,22 @@
             <img v-else :src="mediaUrl">
 
             <div class="hotspot-area-image-overlay" ref="hotspotArea">
-                <template v-if="element.data.products">
-                    <div v-if="element.config.productMediaHotspots.value[product.id]"
-                         v-for="product in element.data.products"
-                         :style="pointerPositionCss(product.id)"
-                         class="hotspot-area-image-overlay-dot"
-                         v-tooltip="{message: product.translated.name, position: 'top'}">
-                    </div>
+                <template
+                        v-if="element.data.products"
+                        v-for="product in element.data.products"
+                >
+                    <div
+                            v-if="element.config.productMediaHotspots.value[product.id]"
+                            :style="pointerPositionCss(product.id)"
+                            class="hotspot-area-image-overlay-dot"
+                            v-tooltip="{message: product.translated.name, position: 'top'}"
+                    ></div>
                 </template>
             </div>
         </div>
     </div>
 
     <div class="product-list">
-        <sw-cms-el-moorl-product-buy-list v-bind="{ element }"/>
+        <sw-cms-el-moorl-product-buy-list v-model:element="element"/>
     </div>
 </div>
