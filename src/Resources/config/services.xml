@@ -11,7 +11,7 @@
         </service>
 
         <service id="MoorlCmsShopTheLook\Demo\Standard\DemoStandard">
-            <tag name="moorl.foundation.data" priority="0" />
+            <tag name="moorl.foundation.data" priority="0"/>
         </service>
     </services>
 </container>
