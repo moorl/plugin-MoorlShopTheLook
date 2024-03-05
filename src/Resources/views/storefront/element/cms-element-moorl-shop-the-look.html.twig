@@ -4,11 +4,15 @@
     {% set enableAddToCartAll = element.config.enableAddToCartAll.value %}
     {% set hoverCardHideButton = element.config.hoverCardHideButton.value %}
     {% set enableDirectUrl = element.config.enableDirectUrl.value %}
+    {% set discountActive = element.config.discountActive.value %}
+    {% set discountPercentage = element.config.discountPercentage.value %}
+    {% set discountName = element.config.discountName.value %}
 
     {% if context.currentCustomerGroup.id == config('MoorlCmsShopTheLook.config.customerGroup') %}
         {% set enablePrices = false %}
         {% set enableAddToCartSingle = false %}
         {% set enableAddToCartAll = false %}
+        {% set discountActive = false %}
     {% endif %}
 
     <div class="cms-element-{{ element.type }} {{ element.config.style.value }}"
