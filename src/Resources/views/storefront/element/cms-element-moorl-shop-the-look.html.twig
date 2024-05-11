@@ -75,9 +75,10 @@
                                                 {% if not hoverCardHideButton %}
                                                     <div class="d-grid">
                                                         <a href="{{ seoUrl('frontend.detail.page', {'productId': product.id}) }}"
-                                                           class="btn btn-primary btn-buy"
+                                                           data-ajax-modal="modal"
                                                            data-modal-class="quickview-modal"
                                                            data-url="{{ path('widgets.quickview.minimal', { 'productId': product.id }) }}"
+                                                           class="btn btn-primary btn-buy"
                                                         >{{ "listing.boxProductDetails"|trans|striptags }}</a>
                                                     </div>
                                                 {% endif %}
