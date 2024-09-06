@@ -11,5 +11,34 @@
             <label>Disable prices for customer group</label>
             <label lang="de-DE">Preise für Kundengruppe ausblenden</label>
         </component>
+
+        <input-field type="single-select">
+            <name>layout</name>
+            <label>Layout of the hover product box</label>
+            <label lang="de-DE">Layout der Hover-Produktbox</label>
+            <options>
+                <option>
+                    <id>old</id>
+                    <name>Old</name>
+                </option>
+                <option>
+                    <id>standard</id>
+                    <name>Standard</name>
+                </option>
+                <option>
+                    <id>image</id>
+                    <name>Image</name>
+                </option>
+                <option>
+                    <id>minimal</id>
+                    <name>Minimal</name>
+                </option>
+                <option>
+                    <id>wishlist</id>
+                    <name>Wishlist</name>
+                </option>
+            </options>
+            <defaultValue>old</defaultValue>
+        </input-field>
     </card>
 </config>

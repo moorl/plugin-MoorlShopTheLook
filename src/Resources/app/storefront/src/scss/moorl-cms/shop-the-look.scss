@@ -104,7 +104,6 @@
                     display: none;
                     opacity: 0;
                     transition: opacity 0.3s;
-                    padding: 10px;
                     background-color: rgba($body-bg, 80%);
                     color: $body-color;
                     width: 160px;
@@ -125,9 +124,13 @@
                         border-color: transparent transparent rgba($body-bg, 80%) transparent;
                     }
 
-                    img, p {
+                    img {
                         margin-bottom: 10px;
                         display: block;
+                    }
+
+                    p {
+                        margin-bottom: 10px;
                     }
 
                     h4 {
@@ -136,13 +139,17 @@
                         line-height: 18px;
                     }
 
+                    a {
+                        text-decoration: none;
+                    }
+
                     &.hover-card-top {
                         top: auto;
                         bottom: 30px;
 
                         &:before {
                             top: auto;
-                            bottom: -10px;
+                            bottom: -9px;
                             border-width: 10px 15px 0 15px;
                             border-color: rgba($body-bg, 80%) transparent transparent transparent;
                         }
@@ -166,6 +173,19 @@
         display: block;
         height: auto;
         width: 100%;
+    }
+
+    .product-box {
+        .product-price-unit,
+        .product-cheapest-price,
+        .product-variant-characteristics,
+        .product-rating {
+            display: none;
+        }
+
+        .product-image-wrapper {
+            height: 150px;
+        }
     }
 }
 

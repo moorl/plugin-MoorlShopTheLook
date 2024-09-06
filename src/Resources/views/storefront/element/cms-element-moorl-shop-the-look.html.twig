@@ -57,29 +57,38 @@
                                             {% if element.config.enableAnimatedHotspots.value %}
                                                 <div class="pulse"></div>{% endif %}
                                             <div class="hover-card {% if positionTop > 50 %}hover-card-top{% endif %}">
-                                                {% if product.cover.media.url %}
-                                                    {% set attributes = {
-                                                        'alt': product.translated.name
+                                                {% if config('MoorlCmsShopTheLook.config.layout') and config('MoorlCmsShopTheLook.config.layout') != 'old' %}
+                                                    {% sw_include '@Storefront/storefront/component/product/card/box.html.twig' with {
+                                                        'layout': config('MoorlCmsShopTheLook.config.layout'),
+                                                        'displayMode': 'cover'
                                                     } %}
-                                                    {% sw_thumbnails 'product-image-thumbnails' with { media: product.cover.media } %}
                                                 {% else %}
-                                                    {% sw_icon 'placeholder' style {'size': 'fluid'} %}
-                                                {% endif %}
+                                                    <div class="p-2">
+                                                        {% if product.cover.media.url %}
+                                                            {% set attributes = {
+                                                                'alt': product.translated.name
+                                                            } %}
+                                                            {% sw_thumbnails 'product-image-thumbnails' with { media: product.cover.media } %}
+                                                        {% else %}
+                                                            {% sw_icon 'placeholder' style {'size': 'fluid'} %}
+                                                        {% endif %}
 
-                                                <h4>{{ product.translated.name }}</h4>
+                                                        <h4>{{ product.translated.name }}</h4>
 
-                                                {% if enablePrices %}
-                                                    <p>{{ price.unitPrice|currency }}{{ "general.star"|trans|sw_sanitize }}</p>
-                                                {% endif %}
+                                                        {% if enablePrices %}
+                                                            <p>{{ price.unitPrice|currency }}{{ "general.star"|trans|sw_sanitize }}</p>
+                                                        {% endif %}
 
-                                                {% if not hoverCardHideButton %}
-                                                    <div class="d-grid">
-                                                        <a href="{{ seoUrl('frontend.detail.page', {'productId': product.id}) }}"
-                                                           data-ajax-modal="modal"
-                                                           data-modal-class="quickview-modal"
-                                                           data-url="{{ path('widgets.quickview.minimal', { 'productId': product.id }) }}"
-                                                           class="btn btn-primary btn-buy"
-                                                        >{{ "listing.boxProductDetails"|trans|striptags }}</a>
+                                                        {% if not hoverCardHideButton %}
+                                                            <div class="d-grid">
+                                                                <a href="{{ seoUrl('frontend.detail.page', {'productId': product.id}) }}"
+                                                                   data-ajax-modal="modal"
+                                                                   data-modal-class="quickview-modal"
+                                                                   data-url="{{ path('widgets.quickview.minimal', { 'productId': product.id }) }}"
+                                                                   class="btn btn-primary btn-buy"
+                                                                >{{ "listing.boxProductDetails"|trans|striptags }}</a>
+                                                            </div>
+                                                        {% endif %}
                                                     </div>
                                                 {% endif %}
                                             </div>
